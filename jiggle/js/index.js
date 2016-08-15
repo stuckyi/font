@@ -396,7 +396,7 @@ var options = {
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
-    background(0, 0, 80);
+    background(255);
     colorMode(HSL);
 
     console.log("생성된 글자배열 요소 수 : " + letterArray.length);
@@ -436,7 +436,7 @@ function setup() {
 }
 
 function draw() {
-    background(0, 0, 80);
+    background(255);
 
     for (var i = 0; i < moverArray.length; i++) {
         var m = moverArray[i];
