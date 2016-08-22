@@ -128,4 +128,12 @@ var cp11x = cp5x;
 var cp11y = cp7y;
 
 /* 종적 모음 위치 *** */
-var dp1x=w2/2, dp1y=mh0, dp2x=dp1x, dp2y=h2-mh0,dp3x=w2-mw0, dp3y=dp1y, dp4x=dp3x, dp4y=dp2y, dp5x=dp1x, dp5y=(dp1y+dp2y)/2, dp6x=dp3x, dp6y=dp5y,dp7x=mw0, dp7y=dp5y, dp8x=dp5x, dp8y=dp5y-2*h1/3, dp9x=dp3x, dp9y=dp8y, dp10x=dp5x, dp10y=dp5y-h1/3, dp11x=dp6x, dp11y=dp10y, dp12x=dp5x, dp12y=dp5y+h1/3, dp13x=dp6x, dp13y=dp6y+h1/3, dp14x=dp5x, dp14y=dp5y-h1/6, dp15x=dp6x, dp15y=dp6y-h1/6, dp16x=dp7x, dp16y=dp14y, dp17x=dp5x, dp17y=dp5y+h1/6, dp18x=dp6x, dp18y=dp6y+h1/6, dp19x=dp7x, dp19y = dp17y;
+var dp1x = w2 / 2, dp1y = mh0, dp2x = dp1x, dp2y = h2 - mh0, dp3x = w2 - mw0, dp3y = dp1y, dp4x = dp3x, dp4y = dp2y, dp5x = dp1x, dp5y = (dp1y + dp2y) / 2, dp6x = dp3x, dp6y = dp5y, dp7x = mw0, dp7y = dp5y, dp8x = dp5x, dp8y = dp5y - 2 * h1 / 3, dp9x = dp3x, dp9y = dp8y, dp10x = dp5x, dp10y = dp5y - h1 / 3, dp11x = dp6x, dp11y = dp10y, dp12x = dp5x, dp12y = dp5y + h1 / 3, dp13x = dp6x, dp13y = dp6y + h1 / 3, dp14x = dp5x, dp14y = dp5y - h1 / 6, dp15x = dp6x, dp15y = dp6y - h1 / 6, dp16x = dp7x, dp16y = dp14y, dp17x = dp5x, dp17y = dp5y + h1 / 6, dp18x = dp6x, dp18y = dp6y + h1 / 6, dp19x = dp7x, dp19y = dp17y;
+
+
+
+
+
+  /* 곁받침 자소 선언 : code로 인식하지 못하는 문제 해결방안 *** */ 
+  var 자소ㄱㅅ = Hangul.assemble(['ㄱ', 'ㅅ']), 자소ㄴㅈ = Hangul.assemble(['ㄴ', 'ㅈ']), 자소ㄴㅎ = Hangul.assemble(['ㄴ', 'ㅎ']), 자소ㄹㄱ = Hangul.assemble(['ㄹ', 'ㄱ']), 자소ㄹㅁ = Hangul.assemble(['ㄹ', 'ㅁ']), 자소ㄹㅂ = Hangul.assemble(['ㄹ', 'ㅂ']), 자소ㄹㅅ = Hangul.assemble(['ㄹ', 'ㅅ']), 자소ㄹㅌ = Hangul.assemble(['ㄹ', 'ㅌ']), 자소ㄹㅍ = Hangul.assemble(['ㄹ', 'ㅍ']), 자소ㄹㅎ = Hangul.assemble(['ㄹ', 'ㅎ']), 자소ㅂㅅ = Hangul.assemble(['ㅂ', 'ㅅ']), 자소우 = Hangul.disassemble('우')[1];
+

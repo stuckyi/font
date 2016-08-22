@@ -93,13 +93,15 @@ class 한글 {
     }
 
     static 얇은ㅂ() {
-        line(bp1x,bp1y,bp5x,bp5y);
+        line(bp1x,bp1y,bp13x,bp13y);
         line(bp5x,bp5y,bp17x,bp17y);
+        line(bp13x,bp13y,bp17x,bp17y);
+        line(bp9x,bp9y,bp11x,bp11y);
     }
     static 얇은ㅅ() {
-        line(bp1x,bp1y,bp5x,bp5y);
-        line(bp1x,bp1y,bp13x,bp13y);
-        line(bp13x,bp13y,bp17x,bp17y);
+        line(bp3x,bp3y,bp10x,bp10y);
+        line(bp10x,bp10y,bp13x,bp13y);
+        line(bp10x,bp10y,bp17x,bp17y);
     }
     static 얇은ㅈ() {
         line(bp1x,bp1y,bp5x,bp5y);
@@ -168,7 +170,7 @@ class 한글 {
         line(cp5x,cp5y,cp11x+g,cp11y);
     } 
 
-    static 으(g) {
+    static 으() {
         line(cp1x, cp1y, cp2x, cp2y);
     } 
 
@@ -389,75 +391,117 @@ class 한글 {
 
     //겹받침 ㄱㅅ
     static bottom15() {
-        얇은ㄱ();
-        얇은ㅅ();
+        this.얇은ㄱ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅅ();
+        pop();
     }
     //겹받침 ㄴㅈ
     static bottom16() {
-        얇은ㄴ();
-        얇은ㅈ();
+        this.얇은ㄴ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅈ();
+        pop();
     }
     //겹받침 ㄴㅈ
     static bottom16() {
-        얇은ㄴ();
-        얇은ㅈ();
+        this.얇은ㄴ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅈ();
+        pop();
     }
     //겹받침 ㄴㅎ
     static bottom17() {
-        얇은ㄴ();
-        얇은ㅎ();
+        this.얇은ㄴ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅎ();
+        pop();
     }
     //겹받침 ㄹㄱ
     static bottom18() {
-        얇은ㄹ();
-        얇은ㄱ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㄱ();
+        pop();
     }
     //겹받침 ㄹㅁ
     static bottom19() {
-        얇은ㄹ();
-        얇은ㅁ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅁ();
+        pop();
     }
     //겹받침 ㄹㅂ
     static bottom20() {
-        얇은ㄹ();
-        얇은ㅂ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅂ();
+        pop();
     }
     //겹받침 ㄹㅅ
     static bottom21() {
-        얇은ㄹ();
-        얇은ㅅ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅅ();
+        pop();
     }
     //겹받침 ㄹㅌ
     static bottom22() {
-        얇은ㄹ();
-        얇은ㅌ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅌ();
+        pop();
     }
     //겹받침 ㄹㅍ
     static bottom23() {
-        얇은ㄹ();
-        얇은ㅍ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅍ();
+        pop();
     }
     //겹받침 ㄹㅎ
     static bottom24() {
-        얇은ㄹ();
-        얇은ㅎ();
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅎ();
+        pop();
     }
     //겹받침 ㅂㅅ
     static bottom25() {
-        얇은ㅂ();
-        얇은ㅅ();
+        this.얇은ㅂ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅅ();
+        pop();
     }
 
     /** 쌍자음 **************************/
     // ㄲ, ㅆ
     static ㄲ() {
-        얇은ㄱ();
-        얇은ㄱ();
+        this.얇은ㄱ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㄱ();
+        pop();
     }
     // ㄲ, ㅆ
     static ㅆ() {
-        얇은ㅅ();
-        얇은ㅅ();
+        this.얇은ㅅ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅅ();
+        pop();
     }
 
     update() {
