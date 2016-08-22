@@ -367,7 +367,7 @@ function c2(tx,ty,g){
     pop();
 }
 
-//ㅜ
+//우우
 function c3(tx,ty,g){
     push();
     noFill();
@@ -379,7 +379,7 @@ function c3(tx,ty,g){
     pop();
 }
 
-//ㅠㅜ 
+//ㅠ
 function c4(tx,ty,g){
     push();
     noFill();

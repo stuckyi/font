@@ -1,4 +1,5 @@
 console.log("stuckyifont-0.1.js");
+console.log("ㅇㅇㅇ");
 
 
 
@@ -100,8 +101,9 @@ function draw() {
 //글자자소 생성 함수 --------------------------------------
 function 틸트폰트생성(letter, tx, ty, g) {
 
-    var letterSplit = letter.split('');
-
+    
+    // console.log(letter);
+    // console.log(letterSplit);
     //각 자소타입별 위치
     var 닿자위치 = {
             x: tx + g,
@@ -120,9 +122,7 @@ function 틸트폰트생성(letter, tx, ty, g) {
             y: ty + m4
         };
 
-    for (var index = 0; index < letterSplit.length; index++) {
-        var rowLetter = letterSplit[index];
-        var disassemble = Hangul.disassemble(rowLetter);
+        var disassemble = Hangul.disassemble(letter);
 
         //겹받침 체크후 자소배열을 곁받침형태로 변환
         var 겹받침인가 = 겹받침체크(disassemble);
@@ -336,7 +336,7 @@ function 틸트폰트생성(letter, tx, ty, g) {
                 break;
             }
 
-        }
+        
     }
 
 } //makeJaso end
