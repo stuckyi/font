@@ -586,3 +586,10 @@ window.addEventListener('deviceorientation', function(e)
   베타 = e.beta;
   감마 = e.gamma;
 });
+
+
+
+function mousePressed() {
+  noLoop();
+  console.log("noLoop");
+}
