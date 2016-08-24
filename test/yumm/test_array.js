@@ -1,23 +1,39 @@
 
 var m;
-
+var mArray = [];
 function setup(){
   createCanvas(500, 500);
   fill(255, 100, 100); 
   noStroke();
   
-  m = new Mover(250, 250);//1마리
-   
+//  m = new Mover(250, 250);
+    
+ for(var i = 0; i < 100; i++){
+     var m = new Mover(random(0, width), random(0, height));
+     mArray.push(m);
+ }
+    
+    
+    
+//  m.display();
+  
+  
 }
 
 function draw(){
   background(255);
-  var mx = map(mouseX, 0, width, 0, 360); //마우스위치X를 활용하기위함.
-
+  var mx = map(mouseX, 0, width, 0, 360);
+    
+    
+ for(var i = 0; i < mArray.length; i++){
+     mArray[i].update(mx);
+     mArray[i].display();
+ }
+/*
   m.update(mx);
   m.display();
   m.viewInfo(); //현재 정보 텍스트 출력
-  
+  */
 }
 
 
@@ -30,15 +46,14 @@ class Mover{
     this.startX = startX;
     this.startY = startY;
     this.theta = 0.01;
+
   }
-    
   //-이하 함수이름은 탬이 임의로 정한것---------------------
   display(){
     this.friends();
   }
   //캐릭터 만드는 곳
   
-    
   friends(){
     //캐릭터 통합위치 기억
     push();
@@ -55,12 +70,9 @@ class Mover{
     
   }
   
-    
-    
   body(){
     ellipse(0, 0, 60, 80); 
   }
-    
   leg(tx, ty){
     // print("leg");
     push();
@@ -72,7 +84,6 @@ class Mover{
     noStroke();
     pop();
   }
-    
   eyes(tx, ty){
     push();
     translate(tx, ty);
