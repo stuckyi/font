@@ -1,9 +1,33 @@
 
 
+var ddanzit;
+
+//사용자입력문장
+//사용자입력글자배열
+//자소 추출
+//사잇점 계산 ----x
+//사잇점 추출 ----x
+
+//사용자입력문장
+//사용자입력글자배열
+//자소 추출
+//사잇점 매칭 후 객체 생성 
+
+
+
+
+//딴짓클래스는 글자를 받는것이 아니라, 하나의 사잇점만 받는다.
 class 딴짓 {
-    constructor() { 
-        
-        
+    constructor(centerPos, translatePos) {
+        this.centerPos = centerPos; //딴짓객체의 중심점
+        this.translatePos = translatePos;
+    }
+
+    display() {
+        push();
+        translate(this.translatePos.x, this.translatePos.y);
+        ellipse(this.centerPos.x, this.centerPos.y, 2, 2);
+        pop();
     }
     
     /** 자음 모듈 (기본)  **************************/
