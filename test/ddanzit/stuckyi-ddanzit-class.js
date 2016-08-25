@@ -1,8 +1,6 @@
-// stuckyi-class.js
 
-var dataArray = { ㄱ: '', ㄴ: '' };
 
-class 한글 {
+class 딴짓 {
     constructor() { 
         
         
@@ -11,20 +9,36 @@ class 한글 {
     /** 자음 모듈 (기본)  **************************/
     // 닿자, 기본 받침에 쓰이는 자음 모듈
 
-    static ㄱ() {
-
+    ㄱ() {
+        console.log("class 딴짓{} ");
         /* 기존 표현 */
-        line(p1.x, p1.y, p2.x, p2.y);
-        line(p2.x, p2.y, p4.x, p4.y);
+        // line(p1.x, p1.y, p2.x, p2.y);
+        // line(p2.x, p2.y, p4.x, p4.y);
         
+        var useArray = 글자데이터.ㄱ;
+        console.log(useArray);
+        for (var i = 0; i < useArray; i++){
+            var row = useArray[i];
+            console.log(row);
+            rect(row.x, row.y, 4, 4);
+        }
+    }
 
-        //p1과 p2, p2와 p4사이의 점 n개를 구해야 한다.
-        //우리가 이렇게 진행하는 것은, 구조화를 위한 추상화를 하는 개념이라고 이해하자. 모든 자소에 대해 수백개의 pos가 있다면 인간이 눈으로 바라보기조차 힘들다.
-        // 각각의 기준점을 바탕으로 사이의 점을 만들어낸다.
-        //모여라에서처럼 각 기준점 사이의 점을 뽑아낸다음 draw로 간다는 개념이겠지?
-        //미리 계산해둘 point들이기때문에, 효율걱정말자
-
-
+    static ㄱ() {
+        console.log("class 딴짓{} ");
+        /* 기존 표현 */
+        // line(p1.x, p1.y, p2.x, p2.y);
+        // line(p2.x, p2.y, p4.x, p4.y);
+        
+        var useArray = 글자데이터.ㄱ;
+        console.log(useArray);
+        for (var i = 0; i < useArray; i++){
+            var row = useArray[i];
+            console.log(row);
+            rect(row.x, row.y, 4, 4);
+        }
+        
+        /*
         var arrayA = makePointByLerp(p1, p2, 10);
         var arrayB = makePointByLerp(p2, p4, 10);
         
@@ -33,15 +47,8 @@ class 한글 {
         for (var i = 0; i < arrayA.length; i++){
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
-        dataArray.ㄱ = arrayA;
-        console.log("dataArray");
-        console.log(dataArray);
-
-        친구['꿈틀이']();
+       */
         
-
-
-
     }
     static ㄴ() {
 
@@ -85,11 +92,34 @@ class 한글 {
 
     }
     static ㄹ() {
-        line(w1 / 3 + mw0, h1 / 3 + mh0, w1 - mw0, h1 / 3 + mh0);
-        line(w1 - mw0, h1/3 + mh0, w1 - mw0, h1*4/6);
-        line(w1 - mw0, h1*4/6, w1/3 + mw0, h1*4/6);
-        line(w1/3 + mw0, h1*4/6, w1/3 + mw0, h1 - mh0);
-        line(w1/3 + mw0, h1 - mh0, w1-mw0 ,h1-mh0);
+        /* 기존 표현 */
+        
+        line(p1.x, p1.y, p2.x, p2.y);
+        line(p2.x, p2.y, p6.x, p6.y);    
+        line(p6.x, p6.y, p5.x, p5.y);
+        line(p5.x, p5.y, p3.x, p3.y);
+        line(p3.x, p3.y, p4.x, p4.y);
+
+
+        
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(p1, p2, 10);
+        var arrayB = makePointByLerp(p2, p6, 10);
+        var arrayC = makePointByLerp(p6, p5, 10);
+        var arrayD = makePointByLerp(p5, p3, 10);
+        var arrayE = makePointByLerp(p3, p4, 10);
+        
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+
+
     }
     static ㅁ() {
         /* 기존 표현 */
@@ -160,7 +190,28 @@ class 한글 {
         
     }
     static ㅇ() {
-        ellipse(p7.x,p7.y,circleWidth,circleHeight);
+        /* 기존 표현 */
+        // ellipse(p7.x,p7.y,circleWidth,circleHeight);
+        line(p8.x, p8.y, p5.x, p5.y);
+        line(p5.x, p5.y, p17.x, p17.y);
+        line(p17.x, p17.y, p6.x, p6.y);
+        line(p6.x, p6.y, p8.x, p8.y);
+
+        
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(p8, p5, 10);
+        var arrayB = makePointByLerp(p5, p17, 10);
+        var arrayC = makePointByLerp(p17, p6, 10);
+        var arrayD = makePointByLerp(p6, p8, 10);
+        
+        
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
     }
     static ㅈ() {
         /* 기존 표현 */
@@ -286,18 +337,31 @@ class 한글 {
     static ㅎ() {
         /* 기존 표현 */
         line(p9.x,p9.y,p10.x,p10.y);
-        line(p12.x,p12.y,p11.x,p11.y);
-        ellipse(p7.x, p7.y, circleWidth, circleHeight);
+        line(p12.x, p12.y, p11.x, p11.y);
+        //ㅇ
+        line(p8.x, p8.y, p5.x, p5.y);
+        line(p5.x, p5.y, p17.x, p17.y);
+        line(p17.x, p17.y, p6.x, p6.y);
+        line(p6.x, p6.y, p8.x, p8.y);
+
         
 
         /* 새로운 표현 */
         var arrayA = makePointByLerp(p9, p10, 10);
         var arrayB = makePointByLerp(p12, p11, 10);
+        var arrayC = makePointByLerp(p8, p5, 10);
+        var arrayD = makePointByLerp(p5, p17, 10);
+        var arrayE = makePointByLerp(p17, p6, 10);
+        var arrayF = makePointByLerp(p6, p8, 10);
         
         
         
         // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
         arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
         for (var i = 0; i < arrayA.length; i++){
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
@@ -472,9 +536,6 @@ class 한글 {
         var arrayB = makePointByLerp(bp13, bp17, 10);
         // var arrayC = makePointByLerp(bp10, bp13, 10);
         // var arrayD = makePointByLerp(bp10, bp17, 10);
-        
-        
-
         // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
         arrayA.push(...arrayB);
         // arrayA.push(...arrayC);
@@ -483,30 +544,7 @@ class 한글 {
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
     }
-    static 얇은ㅎ() {
-        /* 기존 표현 */
-        line(bp3.x,bp3.y,bp7.x,bp7.y);
-        line(bp6.x,bp6.y,bp8.x,bp8.y);
-        ellipse(bp12.x, bp12.y, circleWidth2, circleHeight2);
-        
-        /* 새로운 표현 */
-        var arrayA = makePointByLerp(bp3, bp7, 10);
-        var arrayB = makePointByLerp(bp6, bp8, 10);
-        // var arrayC = makePointByLerp(bp10, bp13, 10);
-        // var arrayD = makePointByLerp(bp10, bp17, 10);
-        
-        
-
-        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
-        arrayA.push(...arrayB);
-        // arrayA.push(...arrayC);
-        // arrayA.push(...arrayD);
-        for (var i = 0; i < arrayA.length; i++){
-            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
-        }
-
-
-    }
+    
     static 얇은ㄹ() {
         /* 기존 표현 */
         line(bp1.x, bp1.y, bp5.x, bp5.y);
@@ -612,6 +650,41 @@ class 한글 {
         for (var i = 0; i < arrayA.length; i++){
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
+    }
+
+    static 얇은ㅎ() {
+        /* 기존 표현 */
+        line(bp3.x,bp3.y,bp7.x,bp7.y);
+        line(bp6.x,bp6.y,bp8.x,bp8.y);
+        // ellipse(bp12.x, bp12.y, circleWidth2, circleHeight2);
+        line(bp10.x, bp10.y, bp9.x, bp12.y);
+        line(bp9.x, bp12.y, bp15.x, bp15.y);
+        line(bp15.x, bp15.y, bp11.x, bp12.y);
+        line(bp11.x, bp12.y, bp10.x, bp10.y);
+
+
+                
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(bp3, bp7, 10);
+        var arrayB = makePointByLerp(bp6, bp8, 10);
+        var arrayC = makePointByLerp(bp10, bp9, 10);
+        var arrayD = makePointByLerp(bp9, bp15, 10);
+        var arrayE = makePointByLerp(bp15, bp11, 10);
+        var arrayF = makePointByLerp(bp11, bp10, 10);
+        
+        
+
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+
+
     }
     
     

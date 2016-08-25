@@ -155,3 +155,489 @@ var dp19 = { x: dp7.x, y: dp17.y };
 /* 곁받침 자소 선언 : code로 인식하지 못하는 문제 해결방안 *** */ 
 var 자소ㄱㅅ = Hangul.assemble(['ㄱ', 'ㅅ']), 자소ㄴㅈ = Hangul.assemble(['ㄴ', 'ㅈ']), 자소ㄴㅎ = Hangul.assemble(['ㄴ', 'ㅎ']), 자소ㄹㄱ = Hangul.assemble(['ㄹ', 'ㄱ']), 자소ㄹㅁ = Hangul.assemble(['ㄹ', 'ㅁ']), 자소ㄹㅂ = Hangul.assemble(['ㄹ', 'ㅂ']), 자소ㄹㅅ = Hangul.assemble(['ㄹ', 'ㅅ']), 자소ㄹㅌ = Hangul.assemble(['ㄹ', 'ㅌ']), 자소ㄹㅍ = Hangul.assemble(['ㄹ', 'ㅍ']), 자소ㄹㅎ = Hangul.assemble(['ㄹ', 'ㅎ']), 자소ㅂㅅ = Hangul.assemble(['ㅂ', 'ㅅ']), 자소우 = Hangul.disassemble('우')[1];
 
+
+
+
+
+//글자단위로 나누어 넣는다.
+function 글자레이아웃(letter, tx, ty, g) {  
+  var 자소배열추출 = Hangul.disassemble(letter); //글자2자소단위 분리
+  //겹받침 체크후 자소배열을 곁받침형태로 변환
+  var 겹받침인가 = 겹받침체크(자소배열추출);
+  if (겹받침인가 === true) {
+      var pushEl = 겹받침변환(자소배열추출);
+      자소배열추출.push(pushEl);
+  }
+  글자(자소배열추출, tx, ty, g); //글자함수에 자소배열과 파라미터를 넘겨준다.
+} // end 글자레이아웃
+
+function 글자(자소배열, tx, ty, g) {
+  
+  //각 자소타입별 위치
+  var 닿자위치 = {
+          x: tx + g,
+          y: ty + m1
+      },
+      종적모음위치 = {
+          x: tx + m2,
+          y: ty
+      },
+      횡적모음위치 = {
+          x: tx,
+          y: ty + m3
+      },
+      받침위치 = {
+          x: tx + g,
+          y: ty + m4
+      };
+  
+  for (var j = 0; j < 자소배열.length; j++) {
+    var 자소 = 자소배열[j];
+    if (자소 === 자소우) { 자소 = '우'; }
+
+    switch (자소) {
+      case 'ㄱ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          // 한글['ㄱ']();
+          딴짓['ㄱ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄱ']();
+          pop();
+        }
+        break;
+      case 'ㄴ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㄴ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄴ']();
+          pop();
+        }
+        break;
+      case 'ㄷ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㄷ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄷ']();
+          pop();
+        }
+        break;
+      case 'ㄹ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㄹ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄹ']();
+          pop();
+        }
+        break;
+      case 'ㅁ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅁ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅁ']();
+          pop();
+        }
+        break;
+      case 'ㅂ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅂ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅂ']();
+          pop();
+        }
+        break;
+      case 'ㅅ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅅ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅅ']();
+          pop();
+        }
+        break;
+      case 'ㅇ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅇ']();
+          pop();
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅇ']();
+          pop();
+        }
+        break;
+      case 'ㅈ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅈ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅈ']();
+          pop();
+        }
+        break;
+      case 'ㅊ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅊ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅊ']();
+          pop();
+        }
+        break;
+      case 'ㅋ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅋ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅋ']();
+          pop();
+        }
+        break;
+      case 'ㅌ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅌ']();
+          pop();
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅌ']();
+          pop();
+        }
+        break;
+      case 'ㅍ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅍ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅍ']();
+          pop();
+        }
+        break;
+      case 'ㅎ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅎ']();
+          pop();
+          
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅎ']();
+          pop();
+        }
+        break;
+      case 'bottom15':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom15']();
+        pop();
+        break;
+      case 'bottom16':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom16']();
+        pop();
+        break;
+      case 'bottom17':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom17']();
+        pop();
+        break;
+      case 'bottom18':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom18']();
+        pop();
+        break;
+      case 'bottom19':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom19']();
+        pop();
+        break;
+      case 'bottom20':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom20']();
+        pop();
+        break;
+      case 'bottom21':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom21']();
+        pop();
+        break;
+      case 'bottom22':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom22']();
+        pop();
+        break;
+      case 'bottom23':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom23']();
+        pop();
+        break;
+      case 'bottom24':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom24']();
+        pop();
+        break;
+      case 'bottom25':
+        push();
+        translate(받침위치.x, 받침위치.y);
+        한글['bottom25']();
+        pop();
+        break;
+      case 'ㄲ':
+         if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㄲ']();
+          pop();
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄲ']();
+          pop();
+        }
+         break;
+      case 'ㄸ':
+         if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㄸ']();
+          pop();
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄸ']();
+          pop();
+        }
+        break;
+      case 'ㅆ':
+        if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㅆ']();
+          pop();
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㅆ']();
+          pop();
+        }
+        break;
+      case 'ㅏ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['아A'](g);
+        pop();
+        break;
+      case 'ㅑ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['야A'](g);
+        pop();
+        break;
+      case 'ㅓ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['어A'](g);
+        pop();
+        break;
+      case 'ㅕ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['여A'](g);
+        pop();
+        break;
+      case 'ㅗ':
+        push();
+        translate(횡적모음위치.x, 횡적모음위치.y);
+        한글['오'](g);
+        pop();
+        break;
+      case 'ㅛ':
+        push();
+        translate(횡적모음위치.x, 횡적모음위치.y);
+        한글['요'](g);
+        pop();
+        break;
+      case '우':
+        push();
+        translate(횡적모음위치.x, 횡적모음위치.y);
+        한글['우'](g);
+        pop();
+        break;
+      case 'ㅠ':
+        push();
+        translate(횡적모음위치.x, 횡적모음위치.y);
+        한글['유'](g);
+        pop();
+        break;
+      case 'ㅡ':
+        push();
+        translate(횡적모음위치.x, 횡적모음위치.y);
+        한글['으']();
+        pop();
+      case 'ㅣ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['이A'](g);
+        pop();
+        break;
+      case 'ㅐ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['애A'](g);
+        pop();
+        break;
+      case 'ㅒ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['얘A'](g);
+        pop();
+        break;
+      case 'ㅔ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['에A'](g);
+        pop();
+        break;
+      case 'ㅖ':
+        push();
+        translate(종적모음위치.x, 종적모음위치.y);
+        한글['예A'](g);
+        pop();
+        break;
+      default:
+        push();
+        translate(횡적모음위치.x, 횡적모음위치.y);
+        한글['우']();
+        pop();
+        console.log("글자기본값출력");
+        break;
+    }  //end switch    
+  } //end for()
+  
+  // pop();
+}
+
+
+
+
+//곁받침 체크 함수
+function 겹받침체크(arrayname) {
+    var lastest = arrayname[arrayname.length - 1];
+    var last = arrayname[arrayname.length - 2];
+    var t_lastest = Hangul.isConsonant(lastest);
+    var t_last = Hangul.isConsonant(last);
+    var result = false;
+    if (t_lastest === true && t_last === true) {
+        // console.log("곁밭침을 포함하는 문자 : " + arrayname);
+        result = true;
+    }
+    return result;
+}
+
+//곁받침을 홑낱자로 변환
+function 겹받침변환(arrayname) {
+
+    var lastest = arrayname.pop();
+    var last = arrayname.pop();
+    var newEl = Hangul.assemble([last, lastest]);
+    var result = '';
+    if (newEl === 자소ㄱㅅ) {
+        result = 'bottom15';
+    } else if (newEl === 자소ㄴㅈ) {
+        result = 'bottom16'
+    } else if (newEl === 자소ㄴㅎ) {
+        result = 'bottom17'
+    } else if (newEl === 자소ㄹㄱ) {
+        result = 'bottom18'
+    } else if (newEl === 자소ㄹㅁ) {
+        result = 'bottom19'
+    } else if (newEl === 자소ㄹㅂ) {
+        result = 'bottom20'
+    } else if (newEl === 자소ㄹㅅ) {
+        result = 'bottom21'
+    } else if (newEl === 자소ㄹㅌ) {
+        result = 'bottom22'
+    } else if (newEl === 자소ㄹㅍ) {
+        result = 'bottom23'
+    } else if (newEl === 자소ㄹㅎ) {
+        result = 'bottom24'
+    } else if (newEl === 자소ㅂㅅ) {
+        result = 'bottom25'
+    }
+    return result;           
+}
