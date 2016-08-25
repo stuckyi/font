@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 // stuckyi-class.js
-
-var dataArray = { ㄱ: '', ㄴ: '' };
 
 class 한글 {
     constructor() { 
@@ -19,13 +16,6 @@ class 한글 {
         line(p2.x, p2.y, p4.x, p4.y);
         
 
-        //p1과 p2, p2와 p4사이의 점 n개를 구해야 한다.
-        //우리가 이렇게 진행하는 것은, 구조화를 위한 추상화를 하는 개념이라고 이해하자. 모든 자소에 대해 수백개의 pos가 있다면 인간이 눈으로 바라보기조차 힘들다.
-        // 각각의 기준점을 바탕으로 사이의 점을 만들어낸다.
-        //모여라에서처럼 각 기준점 사이의 점을 뽑아낸다음 draw로 간다는 개념이겠지?
-        //미리 계산해둘 point들이기때문에, 효율걱정말자
-
-
         var arrayA = makePointByLerp(p1, p2, 10);
         var arrayB = makePointByLerp(p2, p4, 10);
         
@@ -34,15 +24,8 @@ class 한글 {
         for (var i = 0; i < arrayA.length; i++){
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
-        dataArray.ㄱ = arrayA;
-        console.log("dataArray");
-        console.log(dataArray);
-
-        친구['꿈틀이']();
+       
         
-
-
-
     }
     static ㄴ() {
 
@@ -86,11 +69,34 @@ class 한글 {
 
     }
     static ㄹ() {
-        line(w1 / 3 + mw0, h1 / 3 + mh0, w1 - mw0, h1 / 3 + mh0);
-        line(w1 - mw0, h1/3 + mh0, w1 - mw0, h1*4/6);
-        line(w1 - mw0, h1*4/6, w1/3 + mw0, h1*4/6);
-        line(w1/3 + mw0, h1*4/6, w1/3 + mw0, h1 - mh0);
-        line(w1/3 + mw0, h1 - mh0, w1-mw0 ,h1-mh0);
+        /* 기존 표현 */
+        
+        line(p1.x, p1.y, p2.x, p2.y);
+        line(p2.x, p2.y, p6.x, p6.y);    
+        line(p6.x, p6.y, p5.x, p5.y);
+        line(p5.x, p5.y, p3.x, p3.y);
+        line(p3.x, p3.y, p4.x, p4.y);
+
+
+        
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(p1, p2, 10);
+        var arrayB = makePointByLerp(p2, p6, 10);
+        var arrayC = makePointByLerp(p6, p5, 10);
+        var arrayD = makePointByLerp(p5, p3, 10);
+        var arrayE = makePointByLerp(p3, p4, 10);
+        
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+
+
     }
     static ㅁ() {
         /* 기존 표현 */
@@ -161,7 +167,28 @@ class 한글 {
         
     }
     static ㅇ() {
-        ellipse(p7.x,p7.y,circleWidth,circleHeight);
+        /* 기존 표현 */
+        // ellipse(p7.x,p7.y,circleWidth,circleHeight);
+        line(p8.x, p8.y, p5.x, p5.y);
+        line(p5.x, p5.y, p17.x, p17.y);
+        line(p17.x, p17.y, p6.x, p6.y);
+        line(p6.x, p6.y, p8.x, p8.y);
+
+        
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(p8, p5, 10);
+        var arrayB = makePointByLerp(p5, p17, 10);
+        var arrayC = makePointByLerp(p17, p6, 10);
+        var arrayD = makePointByLerp(p6, p8, 10);
+        
+        
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
     }
     static ㅈ() {
         /* 기존 표현 */
@@ -287,18 +314,31 @@ class 한글 {
     static ㅎ() {
         /* 기존 표현 */
         line(p9.x,p9.y,p10.x,p10.y);
-        line(p12.x,p12.y,p11.x,p11.y);
-        ellipse(p7.x, p7.y, circleWidth, circleHeight);
+        line(p12.x, p12.y, p11.x, p11.y);
+        //ㅇ
+        line(p8.x, p8.y, p5.x, p5.y);
+        line(p5.x, p5.y, p17.x, p17.y);
+        line(p17.x, p17.y, p6.x, p6.y);
+        line(p6.x, p6.y, p8.x, p8.y);
+
         
 
         /* 새로운 표현 */
         var arrayA = makePointByLerp(p9, p10, 10);
         var arrayB = makePointByLerp(p12, p11, 10);
+        var arrayC = makePointByLerp(p8, p5, 10);
+        var arrayD = makePointByLerp(p5, p17, 10);
+        var arrayE = makePointByLerp(p17, p6, 10);
+        var arrayF = makePointByLerp(p6, p8, 10);
         
         
         
         // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
         arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
         for (var i = 0; i < arrayA.length; i++){
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
@@ -473,9 +513,6 @@ class 한글 {
         var arrayB = makePointByLerp(bp13, bp17, 10);
         // var arrayC = makePointByLerp(bp10, bp13, 10);
         // var arrayD = makePointByLerp(bp10, bp17, 10);
-        
-        
-
         // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
         arrayA.push(...arrayB);
         // arrayA.push(...arrayC);
@@ -484,30 +521,7 @@ class 한글 {
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
     }
-    static 얇은ㅎ() {
-        /* 기존 표현 */
-        line(bp3.x,bp3.y,bp7.x,bp7.y);
-        line(bp6.x,bp6.y,bp8.x,bp8.y);
-        ellipse(bp12.x, bp12.y, circleWidth2, circleHeight2);
-        
-        /* 새로운 표현 */
-        var arrayA = makePointByLerp(bp3, bp7, 10);
-        var arrayB = makePointByLerp(bp6, bp8, 10);
-        // var arrayC = makePointByLerp(bp10, bp13, 10);
-        // var arrayD = makePointByLerp(bp10, bp17, 10);
-        
-        
-
-        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
-        arrayA.push(...arrayB);
-        // arrayA.push(...arrayC);
-        // arrayA.push(...arrayD);
-        for (var i = 0; i < arrayA.length; i++){
-            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
-        }
-
-
-    }
+    
     static 얇은ㄹ() {
         /* 기존 표현 */
         line(bp1.x, bp1.y, bp5.x, bp5.y);
@@ -613,6 +627,41 @@ class 한글 {
         for (var i = 0; i < arrayA.length; i++){
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
+    }
+
+    static 얇은ㅎ() {
+        /* 기존 표현 */
+        line(bp3.x,bp3.y,bp7.x,bp7.y);
+        line(bp6.x,bp6.y,bp8.x,bp8.y);
+        // ellipse(bp12.x, bp12.y, circleWidth2, circleHeight2);
+        line(bp10.x, bp10.y, bp9.x, bp12.y);
+        line(bp9.x, bp12.y, bp15.x, bp15.y);
+        line(bp15.x, bp15.y, bp11.x, bp12.y);
+        line(bp11.x, bp12.y, bp10.x, bp10.y);
+
+
+                
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(bp3, bp7, 10);
+        var arrayB = makePointByLerp(bp6, bp8, 10);
+        var arrayC = makePointByLerp(bp10, bp9, 10);
+        var arrayD = makePointByLerp(bp9, bp15, 10);
+        var arrayE = makePointByLerp(bp15, bp11, 10);
+        var arrayF = makePointByLerp(bp11, bp10, 10);
+        
+        
+
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+
+
     }
     
     
@@ -1000,188 +1049,482 @@ class 한글 {
         line(dp10.x+g,dp10.y,dp12.x+g,dp12.y);
         line(dp12.x + g, dp12.y, dp2.x, dp2.y);
         
-=======
->>>>>>> 671918f441422244e850c33822d6cbc54ce2f86c
 
-
-var ddanzit;
-
-//사용자입력문장
-//사용자입력글자배열
-//자소 추출
-//사잇점 계산 ----x
-//사잇점 추출 ----x
-
-//사용자입력문장
-//사용자입력글자배열
-//자소 추출
-//사잇점 매칭 후 객체 생성 
-
-
-
-
-
-class 딴짓 {
-
-
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp10, 10);
+        var arrayB = makePointByLerp(dp10, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        // var arrayD = makePointByLerp(dp14, dp16, 10);
+        // var arrayE = makePointByLerp(dp17, dp19, 10);
+        
     
-    // 기본 속성 부여
-    constructor(centerPos, translatePos){
-        this.positionX = centerPos.x; //x좌표
-        this.positionY = centerPos.y; //y좌표
-        this.translatePos = translatePos;
-        this.theta = 0.1;
-
-        this.bodyWidth = 10; //몸너비
-        this.bodyHeight = 20; //몸길이
-        this.defaultMargin = this.bodyWidth / 10; //단위여백
-        this.eyeR = this.bodyWidth / 6; //눈반지름
-        this.legWeight = 2; //다리굵기
-        this.leg1Height = this.bodyHeight / 4; //허벅지길이
-        this.leg2Height = this.bodyHeight / 4; //정강이길이
-        this.footHeight = this.bodyWidth / 10; //발길이
-        
-        // this.rotation = random(0, 360); // 전체 회전값
-        this.rotation = random(0,10); // 전체 회전값
-        this.rotationLeftLeg1 = 20; // 왼쪽 허벅다리 회전값
-        this.rotationLeftLeg2 = 90; // 왼쪽 정강이 회전값
-        this.rotationLeftFoot = 20; // 왼쪽 발 회전값
-        this.rotationRightLeg1 = 0; //오른쪽 허벅다리 회전값
-        this.rotationRightLeg2 = 0; //오른쪽 정강이 회전값
-        this.rotationRightFoot = 0; //오른쪽 발 회전값
-        
-        this.bodyColor = color('hsl(130,30,60)'); //몸색
-        this.eyeColor = color('hsl(0,0,100)'); //눈색
-    }
-
-    display() {
-        push();
-        translate(this.translatePos.x, this.translatePos.y);
-        this.assembly();
-        pop();
-    }
-    update(mx, my) {
-        var x = map(mx, 0, width, -5, 5);
-        var y = map(my, 0, height, -5, 5);
-
-        var dist = (x, y, this.positionX, this.positionY);
-        if (dist < 10) {
-            this.rotation += this.theta;
-            this.positionX += x;
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        // arrayA.push(...arrayD);
+        // arrayA.push(...arrayE);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
+    }
+
+    static 이B(g) {
+        //중간세로선
+        line(dp1.x,dp1.y,dp8.x+g,dp8.y);
+        line(dp8.x+g,dp8.y,dp12.x+g,dp12.y);
+        line(dp12.x + g, dp12.y, dp2.x, dp2.y);
         
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp8, 10);
+        var arrayB = makePointByLerp(dp8, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        // var arrayD = makePointByLerp(dp14, dp16, 10);
+        // var arrayE = makePointByLerp(dp17, dp19, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        // arrayA.push(...arrayD);
+        // arrayA.push(...arrayE);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+    }
+
+
+
+    static 애A(g) {
+       //중간세로선
+        line(dp1.x,dp1.y,dp10.x+g,dp10.y);
+        line(dp10.x+g,dp10.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp6.x+g,dp6.y,dp5.x+g,dp5.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp11.x+g,dp11.y);
+        line(dp11.x+g,dp11.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp10, 10);
+        var arrayB = makePointByLerp(dp10, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        var arrayD = makePointByLerp(dp6, dp5, 10);
+        var arrayE = makePointByLerp(dp3, dp11, 10);
+        var arrayF = makePointByLerp(dp11, dp13, 10);
+        var arrayG = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+    }
+
+    static 애B(g) {
+        //중간세로선
+        line(dp1.x,dp1.y,dp8.x+g,dp8.y);
+        line(dp8.x+g,dp8.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp6.x+g,dp6.y,dp5.x+g,dp5.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp9.x+g,dp9.y);
+        line(dp9.x+g,dp9.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp8, 10);
+        var arrayB = makePointByLerp(dp8, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        var arrayD = makePointByLerp(dp6, dp5, 10);
+        var arrayE = makePointByLerp(dp3, dp9, 10);
+        var arrayF = makePointByLerp(dp9, dp13, 10);
+        var arrayG = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+    }
+
+
+    static 얘A(g) {
+         //중간세로선
+        line(dp1.x,dp1.y,dp10.x+g,dp10.y);
+        line(dp10.x+g,dp10.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp14.x+g,dp14.y,dp15.x+g,dp15.y);
+        line(dp17.x+g,dp17.y,dp18.x+g,dp18.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp11.x+g,dp11.y);
+        line(dp11.x+g,dp11.y,dp13.x+g,dp13.y);
+        line(dp13.x+g,dp13.y,dp4.x,dp4.y);
+        
+
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp10, 10);
+        var arrayB = makePointByLerp(dp10, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+
+        var arrayD = makePointByLerp(dp14, dp15, 10);
+        var arrayE = makePointByLerp(dp17, dp18, 10);
+
+        var arrayF = makePointByLerp(dp3, dp11, 10);
+        var arrayG = makePointByLerp(dp11, dp13, 10);
+        var arrayH = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        arrayA.push(...arrayH);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+    }
+
+    static 얘B(g) {
+        //중간세로선
+        line(dp1.x,dp1.y,dp10.x+g,dp10.y);
+        line(dp10.x+g,dp10.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp14.x+g,dp14.y,dp15.x+g,dp15.y);
+        line(dp17.x+g,dp17.y,dp18.x+g,dp18.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp11.x+g,dp11.y);
+        line(dp11.x+g,dp11.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp10, 10);
+        var arrayB = makePointByLerp(dp10, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+
+        var arrayD = makePointByLerp(dp14, dp15, 10);
+        var arrayE = makePointByLerp(dp17, dp18, 10);
+
+        var arrayF = makePointByLerp(dp3, dp11, 10);
+        var arrayG = makePointByLerp(dp11, dp13, 10);
+        var arrayH = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        arrayA.push(...arrayH);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+    }
+
+
+
+    static 에A(g) {
+       //중간세로선
+        line(dp1.x,dp1.y,dp10.x+g,dp10.y);
+        line(dp10.x+g,dp10.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp7.x+g,dp7.y,dp5.x+g,dp5.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp11.x+g,dp11.y);
+        line(dp11.x+g,dp11.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp10, 10);
+        var arrayB = makePointByLerp(dp10, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        var arrayD = makePointByLerp(dp7, dp5, 10);
+        var arrayE = makePointByLerp(dp3, dp11, 10);
+        var arrayF = makePointByLerp(dp11, dp13, 10);
+        var arrayG = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        // arrayA.push(...arrayH);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+    }
+
+    static 에B(g) {
+       //중간세로선
+        line(dp1.x,dp1.y,dp8.x+g,dp8.y);
+        line(dp8.x+g,dp8.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp7.x+g,dp7.y,dp5.x+g,dp5.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp9.x+g,dp9.y);
+        line(dp9.x+g,dp9.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp8, 10);
+        var arrayB = makePointByLerp(dp8, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        var arrayD = makePointByLerp(dp7, dp5, 10);
+        var arrayE = makePointByLerp(dp3, dp9, 10);
+        var arrayF = makePointByLerp(dp9, dp13, 10);
+        var arrayG = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        // arrayA.push(...arrayH);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
     }
     
+
+
+
+    static 예A(g) {
+        //중간세로선
+        line(dp1.x,dp1.y,dp10.x+g,dp10.y);
+        line(dp10.x+g,dp10.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp14.x+g,dp14.y,dp16.x+g,dp16.y);
+        line(dp17.x+g,dp17.y,dp19.x+g,dp19.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp11.x+g,dp11.y);
+        line(dp11.x+g,dp11.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp10, 10);
+        var arrayB = makePointByLerp(dp10, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        var arrayD = makePointByLerp(dp14, dp16, 10);
+        var arrayE = makePointByLerp(dp17, dp19, 10);
+        var arrayF = makePointByLerp(dp3, dp11, 10);
+        var arrayG = makePointByLerp(dp11, dp13, 10);
+        var arrayH = makePointByLerp(dp13, dp4, 10);
+        
     
-    assembly(){
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        arrayA.push(...arrayH);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+
+
+    }
+
+    static 예B(g) {
+        //중간세로선
+        line(dp1.x,dp1.y,dp8.x+g,dp8.y);
+        line(dp8.x+g,dp8.y,dp12.x+g,dp12.y);
+        line(dp12.x+g,dp12.y,dp2.x,dp2.y);
+        //가로선
+        line(dp14.x+g,dp14.y,dp16.x+g,dp16.y);
+        line(dp17.x+g,dp17.y,dp19.x+g,dp19.y);
+        //오른쪽세로선
+        line(dp3.x,dp3.y,dp9.x+g,dp9.y);
+        line(dp9.x+g,dp9.y,dp13.x+g,dp13.y);
+        line(dp13.x + g, dp13.y, dp4.x, dp4.y);
+        
+
+        /* 새로운 표현 */
+        var arrayA = makePointByLerp(dp1, dp8, 10);
+        var arrayB = makePointByLerp(dp8, dp12, 10);
+        var arrayC = makePointByLerp(dp12, dp2, 10);
+        var arrayD = makePointByLerp(dp14, dp16, 10);
+        var arrayE = makePointByLerp(dp17, dp19, 10);
+        var arrayF = makePointByLerp(dp3, dp9, 10);
+        var arrayG = makePointByLerp(dp9, dp13, 10);
+        var arrayH = makePointByLerp(dp13, dp4, 10);
+        
+    
+        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
+        arrayA.push(...arrayB);
+        arrayA.push(...arrayC);
+        arrayA.push(...arrayD);
+        arrayA.push(...arrayE);
+        arrayA.push(...arrayF);
+        arrayA.push(...arrayG);
+        arrayA.push(...arrayH);
+        for (var i = 0; i < arrayA.length; i++){
+            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
+        }
+
+
+    }
+
+    /** 겹받침 **************************/
+    // 얇은 자음으로 구성
+
+    //겹받침 ㄱㅅ
+    static bottom15() {
+        this.얇은ㄱ();
         push();
-        translate(this.positionX,this.positionY);
-        // rotate(radians(this.rotation));
-        rotate(radians(this.rotation += 0.01));
-            //몸소환
-            push();
-            this.body();
-                //눈소환
-                this.eyes();
-            pop();
-        
-        
-            //허벅다리 소환하여 왼쪽 허벅다리로 사용
-            push();
-            translate(-this.bodyWidth / 5, this.bodyHeight * 2 / 5);
-            rotate(radians(this.rotationLeftLeg1));
-            this.leg1();
-                //정강이 소환
-                translate(0,this.leg1Height);
-                rotate(radians(this.rotationLeftLeg2));
-                this.leg2();
-                //발
-                translate(0,this.leg2Height);
-                rotate(radians(this.rotationLeftFoot));
-                this.foot();
-            pop();
-        
-        
-            //허벅다리 소환하여 오른쪽 허벅다리로 사용
-            push();
-            translate(this.bodyWidth / 5, this.bodyHeight * 2 / 5);
-            rotate(radians(this.rotationRightLeg1));
-            this.leg1();
-                //정강이
-                translate(0,this.leg1Height);
-                rotate(radians(this.rotationRightLeg2));
-                this.leg2();
-                //발
-                translate(0,this.leg2Height);
-                rotate(radians(this.rotationRightFoot));
-                this.foot();
-            pop();
-        
-        
+        translate(bm3, 0);
+        this.얇은ㅅ();
+        pop();
+    }
+    //겹받침 ㄴㅈ
+    static bottom16() {
+        this.얇은ㄴ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅈ();
+        pop();
+    }
+    //겹받침 ㄴㅈ
+    static bottom16() {
+        this.얇은ㄴ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅈ();
+        pop();
+    }
+    //겹받침 ㄴㅎ
+    static bottom17() {
+        this.얇은ㄴ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅎ();
+        pop();
+    }
+    //겹받침 ㄹㄱ
+    static bottom18() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㄱ();
+        pop();
+    }
+    //겹받침 ㄹㅁ
+    static bottom19() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅁ();
+        pop();
+    }
+    //겹받침 ㄹㅂ
+    static bottom20() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅂ();
+        pop();
+    }
+    //겹받침 ㄹㅅ
+    static bottom21() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅅ();
+        pop();
+    }
+    //겹받침 ㄹㅌ
+    static bottom22() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅌ();
+        pop();
+    }
+    //겹받침 ㄹㅍ
+    static bottom23() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅍ();
+        pop();
+    }
+    //겹받침 ㄹㅎ
+    static bottom24() {
+        this.얇은ㄹ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅎ();
+        pop();
+    }
+    //겹받침 ㅂㅅ
+    static bottom25() {
+        this.얇은ㅂ();
+        push();
+        translate(bm3, 0);
+        this.얇은ㅅ();
         pop();
     }
 
-    body(){
+    /** 쌍자음 **************************/
+    // ㄲ, ㅆ
+    static ㄲ() {
+        this.얇은ㄱ();
         push();
-        fill(20);
-        noStroke();
-        rectMode(CENTER);
-        rect(0,0,this.bodyWidth,this.bodyHeight,this.bodyWidth);
-        this.eyes();
+        translate(bm3, 0);
+        this.얇은ㄱ();
         pop();
     }
-    
-    eyes(){
+    // ㄲ, ㅆ
+    static ㅆ() {
+        this.얇은ㅅ();
         push();
-        fill(255);
-        noStroke();
-        ellipse(-this.defaultMargin,-this.defaultMargin * 2,this.eyeR,this.eyeR);
-        ellipse(2*this.defaultMargin,-this.defaultMargin * 2,this.eyeR,this.eyeR);
+        translate(bm3, 0);
+        this.얇은ㅅ();
         pop();
     }
-    
-    leg1(){
-        push();
-        noFill();
-        stroke(80);
-        strokeWeight(this.legWeight);
-        line(0,0,0,this.leg1Height); 
-        pop();
-    }
-    
-    leg2(){
-        push();
-        noFill();
-        stroke(60);
-        strokeWeight(this.legWeight);
-        line(0,0,0,this.leg2Height);
-        pop();
-    }
-
-    foot(){
-        push();
-        noFill();
-        stroke(20);
-        strokeWeight(this.legWeight);
-        line(0,0,this.footHeight,0);
-        pop();
-    }
-}
-/*
-//딴짓클래스는 글자를 받는것이 아니라, 하나의 사잇점만 받는다.
-class 딴짓 {
-    constructor(centerPos, translatePos) {
-        this.centerPos = centerPos; //딴짓객체의 중심점
-        this.translatePos = translatePos;
-    }
-
-    display() {
-        push();
-        translate(this.translatePos.x, this.translatePos.y);
-        ellipse(this.centerPos.x, this.centerPos.y, 10, 2);
-        pop();
-    }
-    
 
     update() {
         console.log("stuckyi coded font");
@@ -1189,7 +1532,7 @@ class 딴짓 {
 
 }
 
-*/
+
 //시작점과 끝점 사이의 사잇점들을 생성한다. 
 function makePointByLerp(start, end, len){
 
