@@ -2,45 +2,164 @@
 
 var dataArray = { ㄱ: '', ㄴ: '' };
 
-class 한글 {
-    constructor() { 
+
+var bmVec = createVector(bm, 0);
+
+
+글자구조데이터();
+function 글자구조데이터() {
+
+/* 글자구조데이터
+  * 클래스에서 계산하는 것이아니라, setup함수에서 객체 생성시 활용하기 위함.
+  * 자소별 기준점을 통해 글자데이터객체를 구한다.
+*/
+
+    //기준점 (made by yumm)
+    /*
+    var 자소별기준점 = {
+        ㄱ: [[p1, p2], [p2, p4]],
+        ㄴ: [[p1, p2], [p2, p4]],
+        ㄷ: [[p1, p2], [p2, p4]],
+        ㄹ: [],
+        ㅁ: [[p1, p2], [p2, p4], [p1, p3], [p3, p4]],
+        ㅂ: [[p1, p3], [p3, p4], [p2, p4], [p5, p6]],
+        ㅅ: [[p8, p7], [p7, p3], [p7, p4]],
+        ㅇ: [[]],
+        ㅈ: [[p1, p2], [p8, p7], [p7, p3], [p7, p4]],
+        ㅊ: [[p12, p8], [p1, p2], [p8, p7], [p7, p3], [p7, p4]],
+        ㅋ: [[p1, p2], [p5, p6], [p2, p4]],
+        ㅌ: [[p1, p2], [p1, p3], [p5, p6], [p3, p4]],
+        ㅍ: [[p1, p2], [p13, p15], [p14, p16], [p3, p4]],
+        ㅎ: [[p9, p10], [p12, p11], [p7, p8]],
+
+        얇은ㄱ: [[bp1, bp5], [bp5, bp17]],
+        얇은ㄴ: [[bp1, bp13], [bp13, bp17]],
+        얇은ㄷ: [[bp1, bp13], [bp5, bp17], [bp13, bp17], [bp9, bp11]],
+        얇은ㄹ: [[bp1, bp5], [bp5, bp11], [bp9, bp11], [bp9, bp13], [bp13, bp17]],
+        얇은ㅁ: [[bp1, bp5], [bp1, bp13], [bp13, bp17], [bp5, bp17]],
         
+        얇은ㅂ: [[bp1, bp13], [bp5, bp17], [bp13, bp17], [bp9, bp11],],
+        얇은ㅅ: [[bp3, bp10], [bp10, bp13], [bp10, bp17]],
+        얇은ㅈ: [[bp1, bp5], [bp3, bp10], [bp10, bp13], [bp10, bp17]],
+        얇은ㅌ: [[bp1, bp5], [bp1, bp13], [bp13, bp17], [bp9, bp11]],
+        얇은ㅍ: [[bp1, bp5], [bp2, bp14], [bp4, bp16], [bp13, bp17]],
+        얇은ㅎ: [[bp3, bp7], [bp6, bp8]],
+        
+        오: [[cp1, cp2], [cp6, cp3]],
+        요: [[cp1, cp2], [cp8, cp4], [cp9, cp5]],
+        우: [[cp1, cp2], [cp3, cp7]],
+        유: [[cp1, cp2], [cp4, cp10], [cp5, cp11]],
+        으: [[cp1, cp2]],
+        
+        아: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp6, dp5]],
+        야: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp15], [dp17, dp18]],
+        어: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp7, dp5]],
+        여: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp16], [dp17, dp19]],
+        이: [[dp1, dp10], [dp10, dp12], [dp12, dp2]],
+        애: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp6, dp5], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+        얘: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp15], [dp17, dp18], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+        에: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp7, dp5], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+        예: [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp16], [dp17, dp19], [dp3, dp11], [dp11, dp13], [dp13, dp4]]
+    };
+    */
+/*
+        ㄱㅅ: [ ],
+        ㄴㅈ: [],
+        ㄴㅎ: [],
+        ㄹㄱ: [],
+        ㄹㅁ: [],
+        ㄹㅂ: [],
+        ㄹㅅ: [],
+        ㄹㅌ: [],
+        ㄹㅎ: [],
+        ㅂㅅ: [],
+        ㄲ: [],
+        ㄸ: [],
+        ㅆ: []
+
+*/
+
+var 자소별기준점 = [ 
+    [[p1, p2], [p2, p4]],
+    [[p1, p2], [p2, p4]],
+    [[p1, p2], [p2, p4]],
+    [[p1, p2], [p2, p4], [p4, p3], [p3,p5], [p5, p6]], //ㄹ
+    [[p1, p2], [p2, p4], [p1, p3], [p3, p4]],
+    [[p1, p3], [p3, p4], [p2, p4], [p5, p6]],
+    [[p8, p7], [p7, p3], [p7, p4]],
+    [[p9, p10], [p12, p11], [p7, p8]], //ㅇ
+    [[p1, p2], [p8, p7], [p7, p3], [p7, p4]],
+    [[p12, p8], [p1, p2], [p8, p7], [p7, p3], [p7, p4]],
+    [[p1, p2], [p5, p6], [p2, p4]],
+    [[p1, p2], [p1, p3], [p5, p6], [p3, p4]],
+    [[p1, p2], [p13, p15], [p14, p16], [p3, p4]],
+    [[p9, p10], [p12, p11], [p7, p8]],
+
+    [[bp1, bp5], [bp5, bp17]],
+    [[bp1, bp13], [bp13, bp17]],
+    [[bp1, bp13], [bp5, bp17], [bp13, bp17], [bp9, bp11]],
+    [[bp1, bp5], [bp5, bp11], [bp9, bp11], [bp9, bp13], [bp13, bp17]],
+    [[bp1, bp5], [bp1, bp13], [bp13, bp17], [bp5, bp17]],
+        
+    [[bp1, bp13], [bp5, bp17], [bp13, bp17], [bp9, bp11],],
+    [[bp3, bp10], [bp10, bp13], [bp10, bp17]],
+    [[bp1, bp5], [bp3, bp10], [bp10, bp13], [bp10, bp17]],
+    [[bp1, bp5], [bp1, bp13], [bp13, bp17], [bp9, bp11]],
+    [[bp1, bp5], [bp2, bp14], [bp4, bp16], [bp13, bp17]],
+    [[bp3, bp7], [bp6, bp8]],
+        
+    [[cp1, cp2], [cp6, cp3]],
+    [[cp1, cp2], [cp8, cp4], [cp9, cp5]],
+    [[cp1, cp2], [cp3, cp7]],
+    [[cp1, cp2], [cp4, cp10], [cp5, cp11]],
+    [[cp1, cp2]],
+        
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp6, dp5]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp15], [dp17, dp18]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp7, dp5]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp16], [dp17, dp19]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp6, dp5], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp15], [dp17, dp18], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp7, dp5], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+    [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp16], [dp17, dp19], [dp3, dp11], [dp11, dp13], [dp13, dp4]]
+    ];
+    
+
+    var 글자데이터객체 = {
+    };
+
+
+
+
+    for (var i = 0; i < 자소별기준점.length; i++) {
+        var row = 자소별기준점[i];
+        console.log(row[0] + ", " + row[1]);
+    } 
+
+
+
+     
+}
+class 데이터 {
+    constructor() { 
+        dataArray.ㄱ = this.데이터생성();
+        dataArray.ㄱ = this.데이터_ㄴ();
         
     }
     
     /** 자음 모듈 (기본)  **************************/
     // 닿자, 기본 받침에 쓰이는 자음 모듈
-
-    static ㄱ() {
-
-        /* 기존 표현 */
-        line(p1.x, p1.y, p2.x, p2.y);
-        line(p2.x, p2.y, p4.x, p4.y);
-        
-
-        //p1과 p2, p2와 p4사이의 점 n개를 구해야 한다.
-        //우리가 이렇게 진행하는 것은, 구조화를 위한 추상화를 하는 개념이라고 이해하자. 모든 자소에 대해 수백개의 pos가 있다면 인간이 눈으로 바라보기조차 힘들다.
-        // 각각의 기준점을 바탕으로 사이의 점을 만들어낸다.
-        //모여라에서처럼 각 기준점 사이의 점을 뽑아낸다음 draw로 간다는 개념이겠지?
-        //미리 계산해둘 point들이기때문에, 효율걱정말자
-
+    데이터생성() {
+        this.데이터생성_ㄱ();
+    }
+    static 데이터_ㄱ() {
 
         var arrayA = makePointByLerp(p1, p2, 10);
         var arrayB = makePointByLerp(p2, p4, 10);
-        
-        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
         arrayA.push(...arrayB);
-        for (var i = 0; i < arrayA.length; i++){
-            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
-        }
-        dataArray.ㄱ = arrayA;
-        console.log("dataArray");
-        console.log(dataArray);
 
-        친구['꿈틀이']();
-        
-
-
+        return arrayA;
 
     }
     static ㄴ() {
@@ -344,57 +463,7 @@ class 한글 {
             ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
         }
     }
-    static 얇은ㄹ() {
-        /* 기존 표현 */
-        line(bp1x,bp1y,bp5x,bp5y);
-        line(bp5x,bp5y,bp11x,bp11y);
-        line(bp9x,bp9y,bp11x,bp11y);
-        line(bp9x,bp9y,bp13x,bp13y);
-        line(bp13x, bp13y, bp17x, bp17y);
-        
 
-
-        /* 새로운 표현 */
-        var arrayA = makePointByLerp(bp1, bp5, 10);
-        var arrayB = makePointByLerp(bp5, bp11, 10);
-        var arrayC = makePointByLerp(bp9, bp11, 10);
-        var arrayD = makePointByLerp(bp9, bp13, 10);
-        var arrayE = makePointByLerp(bp13, bp17, 10);
-        
-
-        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
-        arrayA.push(...arrayB);
-        arrayA.push(...arrayC);
-        arrayA.push(...arrayD);
-        arrayA.push(...arrayE);
-        for (var i = 0; i < arrayA.length; i++){
-            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
-        }
-    }
-    static 얇은ㅁ() {
-        /* 기존 표현 */
-        line(bp1x,bp1y,bp5x,bp5y);
-        line(bp1x,bp1y,bp13x,bp13y);
-        line(bp13x,bp13y,bp17x,bp17y);
-        line(bp5x, bp5y, bp17x, bp17y);
-        
-        /* 새로운 표현 */
-        var arrayA = makePointByLerp(bp1, bp5, 10);
-        var arrayB = makePointByLerp(bp1, bp13, 10);
-        var arrayC = makePointByLerp(bp13, bp17, 10);
-        var arrayD = makePointByLerp(bp5, bp17, 10);
-        
-
-        // arr1에 arr2의 모든 항목을 덧붙임, ES6 Spread_operator
-        arrayA.push(...arrayB);
-        arrayA.push(...arrayC);
-        arrayA.push(...arrayD);
-        for (var i = 0; i < arrayA.length; i++){
-            ellipse(arrayA[i].x, arrayA[i].y, 4, 4);
-        }
-
-
-    }
     static 얇은ㅂ() {
         /* 기존 표현 */
         line(bp1.x,bp1.y,bp13.x,bp13.y);

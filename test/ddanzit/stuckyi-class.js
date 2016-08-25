@@ -306,7 +306,7 @@ class 한글 {
     }
 
 
-    static 애A(g) {
+    static 얘A(g) {
        //중간세로선
         line(dp1x,dp1y,dp10x+g,dp10y);
         line(dp10x+g,dp10y,dp12x+g,dp12y);

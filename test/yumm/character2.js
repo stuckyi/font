@@ -1,28 +1,3 @@
-function setup(){
-    createCanvas(windowWidth, windowHeight);
-    colorMode(HSL);
-    frameRate(10);
-    
-//    var rotationHeadXangle = 0;
-    c1 = new Character2(150,150);
-    c2 = new Character2(200,200);
-    c3 = new Character2(250,90);
-}
-
-
-function draw(){
-    background(230);
-    
-    
-    c1.display();
-    c1.move();
-    
-    c2.display();
-    c2.move();
-    
-    c3.display();
-    c3.move();
-}
 
 
 class Character2{
@@ -38,7 +13,7 @@ class Character2{
         this.faceDivide = random(3.5,5); //얼굴길이 결정, 나눗셈 분모
         this.headDivide = random(1.5,3); //머리높이 결정, 나눗셈 분모
         this.eyeR = 2; //눈반지름
-        this.legWeight = 5; //다리굵기
+        this.legWeight = 4; //다리굵기
         this.leg1Height = this.bodyHeight/random(2,4);
 //        this.leg1Height = this.bodyHeight / 4; //허벅지길이
 //        this.leg2Height = this.bodyHeight / 4; //정강이길이

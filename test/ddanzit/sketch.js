@@ -25,17 +25,31 @@ var 요소위치 = {
 };
 
 var letterPos = { x: 60, y: 150 };
+//데이터 모델
+var 모델 = {
+자소이름 : ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','얇은ㄱ','얇은ㄴ','얇은ㄷ','얇은ㄹ','얇은ㅁ','얇은ㅂ','얇은ㅅ','얇은ㅈ','얇은ㅌ','얇은ㅍ','얇은ㅎ','오','요','우','유','으','아','야','어','여','이','애','얘','에','예']
+};
+var 글자데이터객체 = {}; //자소별 사잇점 배열을 저장하는 객체
+var 글자데이터배열 = []; //자소별 사잇점 배열을 저장하는 배열리스트. 39개(현재 자소 수)
+
 
 
 function setup() {
+  console.log("start setup()");
     
     //캔버스 생성 및 변수에 할당
     var mainCanvas = createCanvas(800, 1000);
     mainCanvas.position(요소위치.canvasX, 요소위치.canvasY); //캔버스 위치
     
+    //글자구조데이터를 계산하고 전역변수로 저장
+    글자구조데이터();
+  
+
+
     //캔버스 기본 스타일 설정
     colorMode(HSL);
     strokeJoin(ROUND);
+    strokeWeight(10);
     noFill();
     // noLoop();
 
@@ -52,8 +66,28 @@ function setup() {
     button.position(요소위치.btnX, 요소위치.btnY); //위치
     button.mousePressed(redrawing); //마우스 클릭시 이벤트함수 호출
     button.addClass('btn btn-default'); //클래스 부여
-}
+  
 
+    noStroke();
+    fill('red');
+    
+  /*
+    for (var t = 0; t < 글자데이터배열.length; t++){
+      var rowv = 글자데이터배열[t];
+      
+      for (var tj = 0; tj < rowv.length; tj++){
+        console.log(rowv[tj]);
+        ellipse(rowv[tj].x, rowv[tj].y, 4, 4);  
+      }
+      translate(10, 10);
+    }
+    */
+    
+  
+    noLoop();
+
+}
+/*
 function draw() {
     background(255);
     //글자크기 변수
@@ -85,9 +119,15 @@ function draw() {
     //위치값 초기화
     rowX = 0;
     rowY = 0;
+
+
+
+    
+    
 } //end draw
 
 
+*/
 
 //글자단위로 나누어 넣는다.
 function 글자레이아웃(letter, tx, ty, g) {
@@ -412,6 +452,19 @@ function 글자(자소배열, tx, ty, g) {
           한글['ㄲ']();
           pop();
         }
+         break;
+      case 'ㄸ':
+         if (j === 0) {
+          push();
+          translate(닿자위치.x, 닿자위치.y);
+          한글['ㄸ']();
+          pop();
+        } else {
+          push();
+          translate(받침위치.x, 받침위치.y);
+          한글['ㄸ']();
+          pop();
+        }
         break;
       case 'ㅆ':
         if (j === 0) {
@@ -592,4 +645,92 @@ window.addEventListener('deviceorientation', function(e)
 function mousePressed() {
   noLoop();
   console.log("noLoop");
+}
+
+
+function 글자구조데이터() {
+  console.log("start 글자구조데이터()");
+
+/* 글자구조데이터
+  * 클래스에서 계산하는 것이아니라, setup함수에서 객체 생성시 활용하기 위함.
+  * 자소별 기준점을 통해 글자데이터객체를 구한다.
+*/
+
+
+  var 자소기준점리스트 = [ 
+      [[p1, p2], [p2, p4]],
+      [[p1, p2], [p2, p4]],
+      [[p1, p2], [p2, p4]],
+      [[p1, p2], [p2, p4], [p4, p3], [p3,p5], [p5, p6]], //ㄹ
+      [[p1, p2], [p2, p4], [p1, p3], [p3, p4]],
+      [[p1, p3], [p3, p4], [p2, p4], [p5, p6]],
+      [[p8, p7], [p7, p3], [p7, p4]],
+      [[p9, p10], [p12, p11], [p7, p8]], //ㅇ
+      [[p1, p2], [p8, p7], [p7, p3], [p7, p4]],
+      [[p12, p8], [p1, p2], [p8, p7], [p7, p3], [p7, p4]],
+      [[p1, p2], [p5, p6], [p2, p4]],
+      [[p1, p2], [p1, p3], [p5, p6], [p3, p4]],
+      [[p1, p2], [p13, p15], [p14, p16], [p3, p4]],
+      [[p9, p10], [p12, p11], [p7, p8]],
+
+      [[bp1, bp5], [bp5, bp17]],
+      [[bp1, bp13], [bp13, bp17]],
+      [[bp1, bp13], [bp5, bp17], [bp13, bp17], [bp9, bp11]],
+      [[bp1, bp5], [bp5, bp11], [bp9, bp11], [bp9, bp13], [bp13, bp17]],
+      [[bp1, bp5], [bp1, bp13], [bp13, bp17], [bp5, bp17]],
+          
+      [[bp1, bp13], [bp5, bp17], [bp13, bp17], [bp9, bp11],],
+      [[bp3, bp10], [bp10, bp13], [bp10, bp17]],
+      [[bp1, bp5], [bp3, bp10], [bp10, bp13], [bp10, bp17]],
+      [[bp1, bp5], [bp1, bp13], [bp13, bp17], [bp9, bp11]],
+      [[bp1, bp5], [bp2, bp14], [bp4, bp16], [bp13, bp17]],
+      [[bp3, bp7], [bp6, bp8]],
+          
+      [[cp1, cp2], [cp6, cp3]],
+      [[cp1, cp2], [cp8, cp4], [cp9, cp5]],
+      [[cp1, cp2], [cp3, cp7]],
+      [[cp1, cp2], [cp4, cp10], [cp5, cp11]],
+      [[cp1, cp2]],
+          
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp6, dp5]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp15], [dp17, dp18]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp7, dp5]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp16], [dp17, dp19]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp6, dp5], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp15], [dp17, dp18], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp7, dp5], [dp3, dp11], [dp11, dp13], [dp13, dp4]],
+      [[dp1, dp10], [dp10, dp12], [dp12, dp2], [dp14, dp16], [dp17, dp19], [dp3, dp11], [dp11, dp13], [dp13, dp4]]
+  ];
+
+
+  //자소클래스 정보 업데이트        
+  console.log("자소기준점리스트 목록 수 : " + 자소기준점리스트.length);
+  console.log("자소줄기ㄱ의 목록 수 : " + 자소기준점리스트[0].length);
+
+
+
+
+  /** 사잇점 구하고 '글자데이터배열'에 추가 ************************** */
+
+  
+
+  var ouputTestCount = 0;
+  var ouetputTestArray;
+
+for(var i = 0; i < 자소기준점리스트.length; i++){
+  var 자소 = 자소기준점리스트[i];
+  var 자소사이점배열 = [];
+
+  for (var j = 0; j < 자소.length; j++){
+    var 손자소 = 자소[j];
+    var 손자소사이점배열 = makePointByLerp(손자소[0], 손자소[1], 10);
+    //사이점배열을 글자데이터배열에 추가한다.
+    자소사이점배열.push(손자소사이점배열.valueOf());
+  }
+  //계산완료된 자소사이점 배열을 글자데이터배열에 추가한다. 
+  글자데이터배열.push(자소사이점배열);
+}
+  console.log("글자데이터배열 : " + 글자데이터배열.length);
+ 
 }
