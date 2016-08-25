@@ -1,4 +1,7 @@
 console.log("sketch.js");
+var wokrname = "스투키스튜디오_CodedFont_딴짓"; //작업기록위함
+
+
 //로딩 후 가장 처음에 보일 글자들
 var letterArray = ["헤", "쳐", "모", "여", "모", "여", "헤", "쳐"]; 
 var state = { currentX: 0, currentY: 0 };
@@ -45,19 +48,21 @@ function setup() {
     makeDomElement('input'); 
     makeDomElement('button');
   
-    //글자데이터생성(); //글자사잇점정보를 생성한다.
+    // 글자데이터생성(8); //글자사잇점정보를 생성한다.
 
-    noLoop();
+    // noLoop();
 }
 
 
 function draw() {
+  // 캔버스영역체크();
+  background(255);
 
-  
-  캔버스영역체크();
   for (var i = 0; i < 딴짓객체배열.length; i++){
     var d = 딴짓객체배열[i];
+    d.update(mouseX, mouseY);
     d.display();
+
   }
 }
 
@@ -95,8 +100,8 @@ function draw() {
 
 */
 //여기서는 입력글자의 자소추출후 딴짓객체배열에 추가한다.
-function makeOOP(letterArrayEl) {
-  console.log("makeOOP");
+function 딴짓객체추가(letterArrayEl) {
+  console.log("딴짓객체추가()");
     //글자 위치 결정하는 for문    
     for (var i = 0; i < letterArrayEl.length; i++) {
         textAreaX = i % 4;
@@ -111,9 +116,6 @@ function makeOOP(letterArrayEl) {
     }
   rowX = 0;
   rowY = 0;
-  console.log("딴짓객체배열.length");
-  console.log(딴짓객체배열.length);
-  console.log(딴짓객체배열);
 }
 
 
@@ -414,459 +416,6 @@ function 딴짓글자(자소배열, tx, ty, g) {
 
 
 
-/* **** 글자레이아웃, 글자 ****************************** */
-
-
-
-/*
-// 글자 레이아웃 생성
-function 글자레이아웃(letter, tx, ty, g) {  
-  var 자소배열추출 = Hangul.disassemble(letter); //글자2자소단위 분리
-  //겹받침 체크후 자소배열을 곁받침형태로 변환
-  var 겹받침인가 = 겹받침체크(자소배열추출);
-  if (겹받침인가 === true) {
-      var pushEl = 겹받침변환(자소배열추출);
-      자소배열추출.push(pushEl);
-  }
-  // 글자(자소배열추출, tx, ty, g); //글자함수에 자소배열과 파라미터를 넘겨준다.
-  딴짓글자(자소배열추출, tx, ty, g); //글자함수에 자소배열과 파라미터를 넘겨준다.
-}
-
-
-
-// 글자 생성
-function 글자(자소배열, tx, ty, g) {
-  //각 자소타입별 위치
-  var 닿자위치 = {
-          x: tx + g,
-          y: ty + m1
-      },
-      종적모음위치 = {
-          x: tx + m2,
-          y: ty
-      },
-      횡적모음위치 = {
-          x: tx,
-          y: ty + m3
-      },
-      받침위치 = {
-          x: tx + g,
-          y: ty + m4
-      };
-  
-  for (var j = 0; j < 자소배열.length; j++) {
-    var 자소 = 자소배열[j];
-    if (자소 === 자소우) { 자소 = '우'; }
-
-    switch (자소) {
-      case 'ㄱ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          // 한글['ㄱ']();
-          // 딴짓['ㄱ']();
-          fill(255, 0, 0);
-          for (var i = 0; i < 글자데이터.ㄱ.length; i++){
-            var ror = 글자데이터.ㄱ[i];
-            var rowPos = createVector(ror.x, ror.y);
-            var eachObject = new 딴짓(rowPos);
-            딴짓객체배열.push(eachObject);
-            // eachObject.display();
-            // rect(ror.x, ror.y, 1, 10);
-          }
-          noFill();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㄱ']();
-          pop();
-        }
-        break;
-      case 'ㄴ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㄴ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㄴ']();
-          pop();
-        }
-        break;
-      case 'ㄷ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㄷ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㄷ']();
-          pop();
-        }
-        break;
-      case 'ㄹ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㄹ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㄹ']();
-          pop();
-        }
-        break;
-      case 'ㅁ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅁ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅁ']();
-          pop();
-        }
-        break;
-      case 'ㅂ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅂ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅂ']();
-          pop();
-        }
-        break;
-      case 'ㅅ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅅ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅅ']();
-          pop();
-        }
-        break;
-      case 'ㅇ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅇ']();
-          pop();
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅇ']();
-          pop();
-        }
-        break;
-      case 'ㅈ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅈ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅈ']();
-          pop();
-        }
-        break;
-      case 'ㅊ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅊ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅊ']();
-          pop();
-        }
-        break;
-      case 'ㅋ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅋ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅋ']();
-          pop();
-        }
-        break;
-      case 'ㅌ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅌ']();
-          pop();
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅌ']();
-          pop();
-        }
-        break;
-      case 'ㅍ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅍ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅍ']();
-          pop();
-        }
-        break;
-      case 'ㅎ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅎ']();
-          pop();
-          
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅎ']();
-          pop();
-        }
-        break;
-      case 'bottom15':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom15']();
-        pop();
-        break;
-      case 'bottom16':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom16']();
-        pop();
-        break;
-      case 'bottom17':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom17']();
-        pop();
-        break;
-      case 'bottom18':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom18']();
-        pop();
-        break;
-      case 'bottom19':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom19']();
-        pop();
-        break;
-      case 'bottom20':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom20']();
-        pop();
-        break;
-      case 'bottom21':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom21']();
-        pop();
-        break;
-      case 'bottom22':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom22']();
-        pop();
-        break;
-      case 'bottom23':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom23']();
-        pop();
-        break;
-      case 'bottom24':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom24']();
-        pop();
-        break;
-      case 'bottom25':
-        push();
-        translate(받침위치.x, 받침위치.y);
-        한글['bottom25']();
-        pop();
-        break;
-      case 'ㄲ':
-         if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㄲ']();
-          pop();
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㄲ']();
-          pop();
-        }
-         break;
-      case 'ㄸ':
-         if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㄸ']();
-          pop();
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㄸ']();
-          pop();
-        }
-        break;
-      case 'ㅆ':
-        if (j === 0) {
-          push();
-          translate(닿자위치.x, 닿자위치.y);
-          한글['ㅆ']();
-          pop();
-        } else {
-          push();
-          translate(받침위치.x, 받침위치.y);
-          한글['ㅆ']();
-          pop();
-        }
-        break;
-      case 'ㅏ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['아A'](g);
-        pop();
-        break;
-      case 'ㅑ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['야A'](g);
-        pop();
-        break;
-      case 'ㅓ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['어A'](g);
-        pop();
-        break;
-      case 'ㅕ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['여A'](g);
-        pop();
-        break;
-      case 'ㅗ':
-        push();
-        translate(횡적모음위치.x, 횡적모음위치.y);
-        한글['오'](g);
-        pop();
-        break;
-      case 'ㅛ':
-        push();
-        translate(횡적모음위치.x, 횡적모음위치.y);
-        한글['요'](g);
-        pop();
-        break;
-      case '우':
-        push();
-        translate(횡적모음위치.x, 횡적모음위치.y);
-        한글['우'](g);
-        pop();
-        break;
-      case 'ㅠ':
-        push();
-        translate(횡적모음위치.x, 횡적모음위치.y);
-        한글['유'](g);
-        pop();
-        break;
-      case 'ㅡ':
-        push();
-        translate(횡적모음위치.x, 횡적모음위치.y);
-        한글['으']();
-        pop();
-      case 'ㅣ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['이A'](g);
-        pop();
-        break;
-      case 'ㅐ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['애A'](g);
-        pop();
-        break;
-      case 'ㅒ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['얘A'](g);
-        pop();
-        break;
-      case 'ㅔ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['에A'](g);
-        pop();
-        break;
-      case 'ㅖ':
-        push();
-        translate(종적모음위치.x, 종적모음위치.y);
-        한글['예A'](g);
-        pop();
-        break;
-      default:
-        push();
-        translate(횡적모음위치.x, 횡적모음위치.y);
-        한글['우']();
-        pop();
-        console.log("글자기본값출력");
-        break;
-    }  //end switch    
-  } //end for()
-  
-  // pop();
-}
-
-*/
-
 
 //곁받침 체크 함수
 function 겹받침체크(arrayname) {
@@ -973,15 +522,21 @@ function redrawing() {
   var inputSplit = inputall.split('');
   letterArray = inputSplit;
   background(255); //다시 그릴때 이전의 글자를 지움(덮어쓰기)
-  makeOOP(letterArray);
+  딴짓객체추가(letterArray);
   loop();
 }
 
 
 //개발함수 : 루프정지
-function mousePressed() {
-  noLoop();
-  console.log("noLoop");
+function keyPressed() {
+  var worktime = "" + year() + ". " + month() + ". " + day() + ". ";
+  //67 is c
+  if (keyCode === 67) {
+    noLoop();
+    console.log("noLoop");
+  } else if (keyCode === 83) {
+    save(wokrname + " " + worktime);
+  }
 }
 
 //콘솔에 사잇점을 구하여 출력한다.
@@ -993,7 +548,7 @@ function 글자데이터생성() {
 
 function 캔버스영역체크() {
   push();
-  noFill();
+  fill(255);
   stroke(0);
   strokeWeight(2);
   rect(0, 0, width, height);
