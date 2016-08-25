@@ -67,38 +67,6 @@ function draw() {
 }
 
 
-/*
-
-function draw() {
-    background(255);
-    //글자크기 변수
-    // letterWidth = letterWidth + 0.1 * 베타;
-    // letterHeight = letterHeight + 0.1 * 베타;
-
-    //글자 위치 변수
-    글자위치.x += 0.05 * 베타;
-    글자위치.y += 0.05 * 베타;
-
-    //글자 위치 결정하는 for문    
-    for (var i = 0; i < letterArray.length; i++) {
-        textAreaX = i % 4;
-        // rowX = textAreaX * (letterWidth + letterSpacing);
-        rowX = textAreaX * (글자위치.x + letterSpacing);
-
-        글자레이아웃(letterArray[i], rowX, rowY, 감마); //2차
-        
-        //글자수에 따라 줄 변경 : 현재 3글자에 변경
-        if (textAreaX === 3) {
-            rowY += (글자위치.y + lineHeight);
-        }
-    }
-    //위치값 초기화
-    rowX = 0;
-    rowY = 0;
-} //end draw
-
-
-*/
 //여기서는 입력글자의 자소추출후 딴짓객체배열에 추가한다.
 function 딴짓객체추가(letterArrayEl) {
   console.log("딴짓객체추가()");
