@@ -11,16 +11,37 @@ function setup(){
 
 function draw(){
     background(230);
+    var angle = -1;
+    
     c1.display();
     c2.display();
     c3.display();
-//    c2.rotation = c2.rotation + 1;
-
-    if(c1.positionX>0){
-    c1.positionX = c1.positionX - 1;
-    c1.positionY = c1.positionY - 1;}
-    else{c1.positionX = 250;
-        c1.positionY = 250;}
+    
+   if(c1.rotationLeftLeg1 == 90){
+        angle = angle * -1;
+    }else if(c1.rotationLeftLeg1 == 0){
+        angle = angle * -1;
+    }else{}
+    
+  c1.rotationLeftLeg1 = c1.rotationLeftLeg1 + angle;
+   
+    
+    
+    //도대체 왜왜왜옹..
+//    c1.positionX= c1.positionX - 0.299;
+//    c1.positionY = c1.positionY + 0.954;
+//    c1.positionX= c1.positionX + sin(radians(this.rotation));
+//    c1.positionY = c1.positionY + cos(radians(this.rotation));
+//    c1.positionX= c1.positionX + sin(this.rotation);
+//    c1.positionY = c1.positionY + cos(this.rotation);
+//    var angle;
+//    if(c1.rotationLeftLeg1<90){
+//        c1.rotationLeftLeg1 = c1.rotationLeftLeg1 + angle;
+//    }else if (c1.rotationLeftLeg == 90){
+//        angle= angle*-1;
+//        c1.rotationLeftLeg1 = c1.rotationLeftLeg1 + angle;
+//    }
+    
 }
 
 
@@ -32,7 +53,7 @@ class Character1{
         this.positionY = ty; //y좌표
         
         this.bodyWidth = 10; //몸너비
-        this.bodyHeight = 20; //몸길이
+        this.bodyHeight = random(10,20); //몸길이
         this.defaultMargin = this.bodyWidth / 10; //단위여백
         this.eyeR = this.bodyWidth / 6; //눈반지름
         this.legWeight = 2; //다리굵기
@@ -48,8 +69,8 @@ class Character1{
         this.rotationRightLeg2 = 0; //오른쪽 정강이 회전값
         this.rotationRightFoot = 0; //오른쪽 발 회전값
         
-        this.bodyColor = color('hsl(130,30,60)'); //몸색
-        this.eyeColor = color('hsl(0,0,100)'); //눈색
+        this.bodyColor = color('hsl(130,30%,60%)'); //몸색
+        this.eyeColor = color('hsl(0,0%,100%)'); //눈색
     }
 
     display(){
@@ -106,7 +127,7 @@ class Character1{
 
     body(){
         push();
-        fill(20);
+        fill(this.bodyColor);
         noStroke();
         rectMode(CENTER);
         rect(0,0,this.bodyWidth,this.bodyHeight,this.bodyWidth);
@@ -116,7 +137,7 @@ class Character1{
     
     eyes(){
         push();
-        fill(255);
+        fill(this.eyeColor);
         noStroke();
         ellipse(-this.defaultMargin,-this.defaultMargin * 2,this.eyeR,this.eyeR);
         ellipse(2*this.defaultMargin,-this.defaultMargin * 2,this.eyeR,this.eyeR);
@@ -126,7 +147,7 @@ class Character1{
     leg1(){
         push();
         noFill();
-        stroke(80);
+        stroke(this.bodyColor);
         strokeWeight(this.legWeight);
         line(0,0,0,this.leg1Height); 
         pop();
@@ -135,7 +156,7 @@ class Character1{
     leg2(){
         push();
         noFill();
-        stroke(60);
+        stroke(this.bodyColor);
         strokeWeight(this.legWeight);
         line(0,0,0,this.leg2Height);
         pop();
@@ -144,7 +165,7 @@ class Character1{
     foot(){
         push();
         noFill();
-        stroke(20);
+        stroke(this.bodyColor);
         strokeWeight(this.legWeight);
         line(0,0,this.footHeight,0);
         pop();
