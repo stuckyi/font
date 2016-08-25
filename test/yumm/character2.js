@@ -5,8 +5,8 @@ function setup(){
     
 //    var rotationHeadXangle = 0;
     c1 = new Character2(150,150);
-   
-    
+    c2 = new Character2(200,200);
+    c3 = new Character2(250,90);
 }
 
 
@@ -15,9 +15,13 @@ function draw(){
     
     
     c1.display();
-    c1.headBanging();
-    c1.legBanging();
-    c1.leg1Swing1();
+    c1.move();
+    
+    c2.display();
+    c2.move();
+    
+    c3.display();
+    c3.move();
 }
 
 
@@ -28,11 +32,14 @@ class Character2{
         this.positionX = tx; //x좌표
         this.positionY = ty; //y좌표
         
-        this.bodyWidth = 20; //몸너비
-        this.bodyHeight = 30; //몸길이
+        this.bodyWidth = random(20,25); //몸너비
+        this.bodyHeight = random(20,30); //몸길이
         this.defaultMargin = this.bodyWidth / 11; //단위여백
-        this.eyeR = this.bodyWidth / 10; //눈반지름
+        this.faceDivide = random(3.5,5); //얼굴길이 결정, 나눗셈 분모
+        this.headDivide = random(1.5,3); //머리높이 결정, 나눗셈 분모
+        this.eyeR = 2; //눈반지름
         this.legWeight = 5; //다리굵기
+        this.leg1Height = this.bodyHeight/random(2,4);
 //        this.leg1Height = this.bodyHeight / 4; //허벅지길이
 //        this.leg2Height = this.bodyHeight / 4; //정강이길이
 //        this.footHeight = this.bodyWidth / 10; //발길이
@@ -46,8 +53,16 @@ class Character2{
         this.rotationLeg1Y = 0; //허벅지 원운동y
         this.rotationLeg1Angle = 0; //허벅지 원운동각
         
+        this.movingBodyDirection = random(-1,1); //몸 가로 움직임 방향
+        this.movingBodyX = 0; //몸 움직임x
+        this.movingBodyY = 0; //몸 움직임y
+        this.movingBodyAngle = 0; //몸 세로 움직임 각도
+        
+        
         this.swingLeg1Angle = 0; //허벅지 흔들리는 각도
         this.swingLegAdd = -1; //허벅지 각도에 더해주는 수
+        
+        
 //        this.rotationLeftLeg1 = 20; // 왼쪽 허벅다리 회전값
 //        this.rotationLeftLeg2 = 90; // 왼쪽 정강이 회전값
 //        this.rotationLeftFoot = 20; // 왼쪽 발 회전값
@@ -71,10 +86,11 @@ class Character2{
     assembly(){
         push();
         translate(this.positionX,this.positionY);
+        translate(this.movingBodyX,this.movingBodyY);
         this.body();    
             //머리
             push();
-            translate(0,-this.bodyHeight/1.8);
+            translate(0,-this.bodyHeight/this.headDivide);
             translate(this.rotationHeadX,this.rotationHeadY);
             this.head();
             pop();
@@ -116,7 +132,7 @@ class Character2{
 
             //얼굴
             fill(this.faceColor);
-            rect(0,-this.bodyHeight/2+this.bodyHeight/5,this.bodyWidth/3.5,this.bodyHeight/5,this.bodyWidth/10);
+            rect(0,-this.bodyHeight/2+this.bodyHeight/4.5,this.bodyWidth/3.5,this.bodyHeight/this.faceDivide,this.bodyWidth/10);
 
             //눈
             push();
@@ -131,6 +147,22 @@ class Character2{
     
     
     //움직임
+    move(){
+    this.movingBody();
+    this.headBanging();
+    this.legBanging();
+    this.leg1Swing1();
+    }
+    
+    
+    
+    movingBody(){
+//        this.movingBodyX = this.movingBodyX + this.movingBodyDirection; //좌우움직임: 현재는 -1과 1사이의 랜덤값으로 되어있음
+        this.movingBodyY = this.movingBodyY + sin(radians(this.movingBodyAngle))*random(1,2);
+        this.movingBodyAngle = this.movingBodyAngle + random(10,40);
+    }
+    
+    
     
     headBanging(){
         this.rotationHeadX = sin(radians(this.rotationHeadAngle))/2;
@@ -141,16 +173,16 @@ class Character2{
     legBanging(){
         this.rotationLeg1X = sin(radians(this.rotationLeg1Angle))/2;
         this.rotationLeg1Y = cos(radians(this.rotationLeg1Angle));
-        this.rotationLeg1Angle = this.rotationLeg1Angle -20;
+        this.rotationLeg1Angle = this.rotationLeg1Angle - random(10,30);
     }
 
     
     leg1Swing1(){
 //        console.log(this.swingLeg1Angle);
-        if(this.swingLeg1Angle <= -15){
+        if(this.swingLeg1Angle <= -random(15,20)){
             
             this.swingLegAdd = this.swingLegAdd * -1;
-        }else if(this.swingLeg1Angle >= 15){
+        }else if(this.swingLeg1Angle >= random(15,20)){
             this.swingLegAdd = this.swingLegAdd * -1;
         }
             
@@ -166,7 +198,7 @@ class Character2{
         stroke(this.legColor);
         strokeWeight(this.legWeight);
         noFill();
-        line(0,0,0,this.bodyHeight/3);
+        line(0,0,0,this.leg1Height);
         pop();
     }
     
