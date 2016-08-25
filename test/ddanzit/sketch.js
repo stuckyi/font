@@ -35,6 +35,7 @@ function setup() {
     var mainCanvas = createCanvas(windowWidth, 5000);
     mainCanvas.position(요소위치.canvasX, 요소위치.canvasY); //캔버스 기준점 변경
     
+    
 
     //Canvas default style
     setStyle(); 
@@ -44,12 +45,16 @@ function setup() {
     makeDomElement('input'); 
     makeDomElement('button');
   
-
+    //글자데이터생성(); //글자사잇점정보를 생성한다.
 
     noLoop();
 }
 
+
 function draw() {
+
+  
+  캔버스영역체크();
   for (var i = 0; i < 딴짓객체배열.length; i++){
     var d = 딴짓객체배열[i];
     d.display();
@@ -979,7 +984,21 @@ function mousePressed() {
   console.log("noLoop");
 }
 
+//콘솔에 사잇점을 구하여 출력한다.
+function 글자데이터생성() {
+  글자구조데이터();
+  viewPosData();
+}
 
+
+function 캔버스영역체크() {
+  push();
+  noFill();
+  stroke(0);
+  strokeWeight(2);
+  rect(0, 0, width, height);
+  pop();
+}
 
 // 스마트폰 가속도계 데이터 accelerometer Data
 window.addEventListener('deviceorientation', function(e) {

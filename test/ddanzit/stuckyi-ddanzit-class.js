@@ -33,21 +33,6 @@ class 딴짓 {
     /** 자음 모듈 (기본)  **************************/
     // 닿자, 기본 받침에 쓰이는 자음 모듈
 
-    ㄱ() {
-        console.log("class 딴짓{} ");
-        /* 기존 표현 */
-        // line(p1.x, p1.y, p2.x, p2.y);
-        // line(p2.x, p2.y, p4.x, p4.y);
-        
-        var useArray = 글자데이터.ㄱ;
-        console.log(useArray);
-        for (var i = 0; i < useArray; i++){
-            var row = useArray[i];
-            console.log(row);
-            rect(row.x, row.y, 4, 4);
-        }
-    }
-
     static ㄱ() {
         console.log("class 딴짓{} ");
         /* 기존 표현 */
