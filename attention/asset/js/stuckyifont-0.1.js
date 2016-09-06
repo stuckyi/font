@@ -362,17 +362,29 @@ function 겹받침변환(arrayname) {
     var last = arrayname.pop();
     var newEl = Hangul.assemble([last, lastest]);
     var result = '';
-    if (newEl === 자소ㄱㅅ) { result = 'bottom15'; }
-    else if (newEl === 자소ㄴㅈ) { result = 'bottom16' }
-    else if (newEl === 자소ㄴㅎ) { result = 'bottom17' }
-    else if (newEl === 자소ㄹㄱ) { result = 'bottom18' }
-    else if (newEl === 자소ㄹㅁ) { result = 'bottom19' }
-    else if (newEl === 자소ㄹㅂ) { result = 'bottom20' }
-    else if (newEl === 자소ㄹㅅ) { result = 'bottom21' }
-    else if (newEl === 자소ㄹㅌ) { result = 'bottom22' }
-    else if (newEl === 자소ㄹㅍ) { result = 'bottom23' }
-    else if (newEl === 자소ㄹㅎ) { result = 'bottom24' }
-    else if (newEl === 자소ㅂㅅ) { result = 'bottom25' }
+    if (newEl === 자소ㄱㅅ) {
+        result = 'bottom15';
+    } else if (newEl === 자소ㄴㅈ) {
+        result = 'bottom16'
+    } else if (newEl === 자소ㄴㅎ) {
+        result = 'bottom17'
+    } else if (newEl === 자소ㄹㄱ) {
+        result = 'bottom18'
+    } else if (newEl === 자소ㄹㅁ) {
+        result = 'bottom19'
+    } else if (newEl === 자소ㄹㅂ) {
+        result = 'bottom20'
+    } else if (newEl === 자소ㄹㅅ) {
+        result = 'bottom21'
+    } else if (newEl === 자소ㄹㅌ) {
+        result = 'bottom22'
+    } else if (newEl === 자소ㄹㅍ) {
+        result = 'bottom23'
+    } else if (newEl === 자소ㄹㅎ) {
+        result = 'bottom24'
+    } else if (newEl === 자소ㅂㅅ) {
+        result = 'bottom25'
+    }
     return result;           
 }
 

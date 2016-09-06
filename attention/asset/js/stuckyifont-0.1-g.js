@@ -2,7 +2,7 @@ console.log("stuckyifont-0.1.js");
 
 
 
-var letterArray = ["자", "동", "생", "성", "해", "주", "세", "요"]; // 로딩 후 가장 처음에 보일 글자들
+var letterArray = ["헤", "쳐", "모", "여", "모", "여", "헤", "쳐"]; // 로딩 후 가장 처음에 보일 글자들
 var state = { currentX: 0, currentY: 0 };
 var textAreaX, textAreaY = 0; //글자 영역 결정 전역변수
 var rowX, rowY = 0;  //글자 위치 결정 전역변수
@@ -19,7 +19,6 @@ var elPos = {
 };
 
 var letterPos = { x: 60, y: 150 };
-
 
 
 function setup() {
@@ -48,9 +47,6 @@ function setup() {
     button.mousePressed(redrawing); //마우스 클릭시 이벤트함수 호출
     button.addClass('btn btn-default'); //클래스 부여
 
-
-    
-
     /*
     greeting = createElement('h4', '');
     greeting.position(220, 45);
@@ -68,8 +64,9 @@ function draw() {
     // letterHeight = letterHeight + 0.1 * beta;
 
     //글자 위치 변수
-    // letterPos.x += 0.05 * beta;
-    // letterPos.y += 0.05 * beta;
+    letterPos.x += 0.05 * beta;
+    letterPos.y += 0.05 * beta;
+
 
     // textSize(25);
     // text(letterPos.x, 100, 400);
@@ -78,16 +75,16 @@ function draw() {
     //글자 위치 결정하는 for문    
     for (var i = 0; i < letterArray.length; i++) {
         textAreaX = i % 4;
-        rowX = textAreaX * (letterWidth + letterSpacing);
-        // rowX = textAreaX * (letterPos.x + letterSpacing);
+        // rowX = textAreaX * (letterWidth + letterSpacing);
+        rowX = textAreaX * (letterPos.x + letterSpacing);
 
         //글자자소 생성 함수
         틸트폰트생성(letterArray[i], rowX, rowY, gamma);
         
         //글자수에 따라 줄 변경 : 현재 3글자에 변경
         if (textAreaX === 3) {
-            rowY += (letterHeight + lineHeight);
-            // rowY += (letterPos.y + lineHeight);
+            // rowY += (letterHeight + lineHeight);
+            rowY += (letterPos.y + lineHeight);
         }
     }
     //위치값 초기화
@@ -362,17 +359,29 @@ function 겹받침변환(arrayname) {
     var last = arrayname.pop();
     var newEl = Hangul.assemble([last, lastest]);
     var result = '';
-    if (newEl === 자소ㄱㅅ) { result = 'bottom15'; }
-    else if (newEl === 자소ㄴㅈ) { result = 'bottom16' }
-    else if (newEl === 자소ㄴㅎ) { result = 'bottom17' }
-    else if (newEl === 자소ㄹㄱ) { result = 'bottom18' }
-    else if (newEl === 자소ㄹㅁ) { result = 'bottom19' }
-    else if (newEl === 자소ㄹㅂ) { result = 'bottom20' }
-    else if (newEl === 자소ㄹㅅ) { result = 'bottom21' }
-    else if (newEl === 자소ㄹㅌ) { result = 'bottom22' }
-    else if (newEl === 자소ㄹㅍ) { result = 'bottom23' }
-    else if (newEl === 자소ㄹㅎ) { result = 'bottom24' }
-    else if (newEl === 자소ㅂㅅ) { result = 'bottom25' }
+    if (newEl === 자소ㄱㅅ) {
+        result = 'bottom15';
+    } else if (newEl === 자소ㄴㅈ) {
+        result = 'bottom16'
+    } else if (newEl === 자소ㄴㅎ) {
+        result = 'bottom17'
+    } else if (newEl === 자소ㄹㄱ) {
+        result = 'bottom18'
+    } else if (newEl === 자소ㄹㅁ) {
+        result = 'bottom19'
+    } else if (newEl === 자소ㄹㅂ) {
+        result = 'bottom20'
+    } else if (newEl === 자소ㄹㅅ) {
+        result = 'bottom21'
+    } else if (newEl === 자소ㄹㅌ) {
+        result = 'bottom22'
+    } else if (newEl === 자소ㄹㅍ) {
+        result = 'bottom23'
+    } else if (newEl === 자소ㄹㅎ) {
+        result = 'bottom24'
+    } else if (newEl === 자소ㅂㅅ) {
+        result = 'bottom25'
+    }
     return result;           
 }
 

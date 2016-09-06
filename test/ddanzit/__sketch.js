@@ -20,15 +20,13 @@ var 요소위치 = {
     inputX: 50, inputY: 55,
     btnX: 255, btnY: 55
 };
-
-
 var letterPos = { x: 60, y: 150 };
 var 글자위치 = { x: 60, y: 150 };
 
 
 //데이터 모델
 var 모델 = {
-자소이름 : ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','얇은ㄱ','얇은ㄴ','얇은ㄷ','얇은ㄹ','얇은ㅁ','얇은ㅂ','얇은ㅅ','얇은ㅈ','얇은ㅌ','얇은ㅍ','얇은ㅎ','오','요','우','유','으','아','야','어','여','이','애','얘','에','예', 'ㄱㅅ', 'ㄴㅈ', 'ㄴㅎ', 'ㄹㄱ', 'ㄹㅁ', 'ㄹㅂ', 'ㄹㅅ', 'ㄹㅌ', 'ㄹㅍ', 'ㄹㅎ', 'ㅂㅅ', 'ㄲ', 'ㅆ', 'ㅉ']
+자소이름 : ['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ','얇은ㄱ','얇은ㄴ','얇은ㄷ','얇은ㄹ','얇은ㅁ','얇은ㅂ','얇은ㅅ','얇은ㅈ','얇은ㅌ','얇은ㅍ','얇은ㅎ','오','요','우','유','으','아','야','어','여','이','애','얘','에','예']
 };
 var 글자데이터객체 = {}; //자소별 사잇점 배열을 저장하는 객체
 var 글자데이터배열 = []; //자소별 사잇점 배열을 저장하는 배열리스트. 39개(현재 자소 수)
@@ -57,38 +55,32 @@ function setup() {
     makeDomElement('input'); 
     makeDomElement('button');
   
-    글자데이터생성(18); //글자사잇점정보를 생성한다.
+    // 글자데이터생성(10); //글자사잇점정보를 생성한다.
     딴짓객체추가(letterArray);
-    // console.log(딴짓객체배열[0]);
-    // console.log(딴짓객체배열.length);
-  
-    
+    console.log(딴짓객체배열[0]);
+    console.log(딴짓객체배열.length);
     
     // 객체보여주기();
 
   
-    // noLoop();
+    noLoop();
 }
 
-/*
+
 function draw() {
   // 캔버스영역체크();
   background(10,1);
   fill(0);
-  push();
-  translate(0, 30);
-
   for (var i = 0; i < 딴짓객체배열.length; i++){
     var d = 딴짓객체배열[i];
     d.display();
     d.move();
   }
-  pop();
 }
 
 
 
-*/
+
 /* **** 딴짓글자레이아웃, 글자 ****************************** */
 
 
@@ -96,7 +88,6 @@ function draw() {
 //딴짓객체추가
 function 딴짓객체추가(letterArrayEl) {
   console.log("딴짓객체추가()");
-  딴짓객체배열 = [];
     //글자 위치 결정하는 for문    
     for (var i = 0; i < letterArrayEl.length; i++) {
         textAreaX = i % 4;
@@ -105,7 +96,7 @@ function 딴짓객체추가(letterArrayEl) {
         딴짓글자레이아웃(letterArrayEl[i], rowX, rowY, 감마); //2차
         
         //글자수에 따라 줄 변경 : 현재 3글자에 변경
-        if (textAreaX === 3) { rowY += (글자위치.y + lineHeight); }
+        if (textAreaX === 5) { rowY += (글자위치.y + lineHeight); }
     }
   rowX = 0;
   rowY = 0;
@@ -116,7 +107,7 @@ function 딴짓객체추가(letterArrayEl) {
 
 // 딴짓글자 레이아웃 생성
 function 딴짓글자레이아웃(letter, tx, ty, g) {  
-  
+  딴짓객체배열 = [];
   // console.log(letter);
   var 자소배열추출 = Hangul.disassemble(letter); //글자2자소단위 분리
   
@@ -136,18 +127,19 @@ function 딴짓글자레이아웃(letter, tx, ty, g) {
 
 function 객체생성(배열이름, 이동위치) {
   console.log("객체생성");
-  console.log(이동위치);
-
   for (var i = 0; i < 배열이름.length; i++){
+    console.log("객체인덱스 : " + i);
     var ror = 배열이름[i];
     push();
     translate(이동위치.x, 이동위치.y);
     ellipse(ror.x, ror.y, 4, 4);
     pop();
-    var randomValue = Math.round(random(0, 1));
-    var eachObject = (randomValue === 0)? new 딴짓1(ror, 이동위치) : new 딴짓2(ror, 이동위치);
-    딴짓객체배열.push(eachObject);
-  }
+    // var eachObject = new 딴짓(ror, 이동위치);
+    var eachObject = new 딴짓2(ror, 이동위치);
+    // eachObject.display();
+    // var eachObject = new 태경(ror, 이동위치);
+      딴짓객체배열.push(eachObject);
+    }
 }
 
 
@@ -155,6 +147,9 @@ function 객체생성(배열이름, 이동위치) {
 function 객체보여주기() {
   background(204);
   console.log(딴짓객체배열);
+  // for (var i = 0; i < 딴짓객체배열.length; i++){
+    // 딴짓객체배열[i].display();
+  // }
 
 }
 
@@ -191,10 +186,8 @@ function 딴짓글자(자소배열, tx, ty, g) {
       
       case 'ㄱ':
         if (j === 0) {
-          
           객체생성(글자데이터.ㄱ, 닿자위치);
         } else {
-          
           객체생성(글자데이터.ㄱ, 받침위치);
         }
         break;
