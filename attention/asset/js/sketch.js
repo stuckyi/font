@@ -2,7 +2,7 @@
 // default values
 var 알파 = 0, 베타 = 0, 감마 = 0;
 var 자소이름리스트;
-var 자소기준점리스트;
+// var 자소기준점리스트;
 var 글자데이터;
 
 
@@ -18,6 +18,7 @@ const MAX_TYPE = 5; // 최대 입력 가능 문자
 const 사잇점개수 = 4;
 var 사용자입력문자 = '간단하게용'; // 사용자입력 기본값
 var isLoop = true;
+var isTilt = false;
 
 
 var 자간 = 140, 행간 = 100;
@@ -39,6 +40,10 @@ var 요소위치 = {
     마진 : { 왼쪽 : 10 }
 };
 
+var 스타일 = {
+    배경색: 0
+};
+
 
 
 
@@ -50,6 +55,8 @@ function setup() {
 
     var mainCanvas = createCanvas(1200, 1000); // 캔버스 생성
     mainCanvas.position(요소위치.캔버스위치); //캔버스 위치 이동
+    background(스타일.배경색);
+    frameRate(20);
     fill(0, 30);
     
     /**
@@ -79,12 +86,13 @@ function setup() {
 }
 
 function draw() {
-    background(255, 50);
+    background(스타일.배경색, 50);
     
     
     for (var value of 캐릭터배열) {
         value.업데이트(베타, 감마);
         value.그리기();
+        value.움직임(); //몬스터객체사용시
     }
     
     /*
@@ -100,7 +108,7 @@ function draw() {
 //버튼 클릭 이벤트 : 클릭할때마다 현재 Input값을 바탕으로 다시 loop를 실행시킨다.
 function redrawing() {
     사용자입력문자 = input.value();  // 새로입력된 입력문자로 변경
-    background(255);         // 이전의 글자를 지움(덮어쓰기)
+    background(스타일.배경색);         // 이전의 글자를 지움(덮어쓰기)
     업데이트();                    // 사용자입력글자로 글자데이터 업데이트
     loop();                     //  루프 실행
 }
@@ -403,52 +411,9 @@ function 업데이트() {
     }
 }
 
-
-//곁받침 체크 함수
-function 겹받침체크(arrayname) {
-    var lastest = arrayname[arrayname.length - 1];
-    var last = arrayname[arrayname.length - 2];
-    var t_lastest = Hangul.isConsonant(lastest);
-    var t_last = Hangul.isConsonant(last);
-    var result = false;
-    if (t_lastest === true && t_last === true) {
-        // console.log("곁밭침을 포함하는 문자 : " + arrayname);
-        result = true;
-    }
-    return result;
-}
-
-//곁받침을 홑낱자로 변환
-function 겹받침변환(arrayname) {
-
-    var lastest = arrayname.pop();
-    var last = arrayname.pop();
-    var newEl = Hangul.assemble([last, lastest]);
-    
-    if (newEl === 자소ㄱㅅ) { return 'ㄱㅅ'; }
-    else if (newEl === 자소ㄴㅈ) { return 'ㄴㅈ' }
-    else if (newEl === 자소ㄴㅎ) { return 'ㄴㅎ' }
-    else if (newEl === 자소ㄹㄱ) { return 'ㄹㄱ' }
-    else if (newEl === 자소ㄹㅁ) { return 'ㄹㅁ' }
-    else if (newEl === 자소ㄹㅂ) { return 'ㄹㅂ' }
-    else if (newEl === 자소ㄹㅅ) { return 'ㄹㅅ' }
-    else if (newEl === 자소ㄹㅌ) { return 'ㄹㅌ' }
-    else if (newEl === 자소ㄹㅍ) { return 'ㄹㅍ' }
-    else if (newEl === 자소ㄹㅎ) { return 'ㄹㅎ' }
-    else if (newEl === 자소ㅂㅅ) { return 'ㅂㅅ' }
-    else {
-        console.error("원하는 형태의 겹받침변환이 없습니다. from 겹받침변환()");
-        return 'ㄴㅈ';
-    }
-    
-}
-
-
 /* 스투키스튜디오 Coded-font class */
-
 class 글자하나{
     constructor(글자별자소배열, 글자인덱스) {
-        
         this.글자별자소배열 = 글자별자소배열;
         this.글자인덱스 = 글자인덱스;
     }
@@ -497,14 +462,35 @@ class 자소하나{
         }
 
         */
+
+        
+
+
+        
+        //몬스터객체 초기화
+        for (var i = 0; i < 글자하나자소배열.length; i++){
+            var 랜덤값 = Math.round(Math.random(1)); //0 or 1
+
+            var 캐릭터 = (랜덤값 === 0)
+                ? new 몬스터B(글자하나자소배열[i], 글자이동점, 자소이동점, 자소타입)
+                : new 몬스터B(글자하나자소배열[i], 글자이동점, 자소이동점, 자소타입);
+            
+            캐릭터배열.push(캐릭터);
+        }
+
+        
+        /*
         //점 객체 초기화
         for (var i = 0; i < 글자하나자소배열.length; i++){
             var 캐릭터 = new 캐릭터하나(글자하나자소배열[i], 글자이동점, 자소이동점, 자소타입);
             캐릭터배열.push(캐릭터);
         }
+        */
     }
 }
 
+
+/*
 class 캐릭터하나 {
     constructor(시작점, 글자이동점, 자소이동점, 자소타입) {
         this.시작점 = 시작점;
@@ -535,8 +521,6 @@ class 캐릭터하나 {
     }
     그리기() {
        
-//        this.가이드선();
-
         var 글자단위이동점 = this.글자이동점;
         var 자소단위이동점;
         
@@ -548,6 +532,7 @@ class 캐릭터하나 {
         push();
         translate(글자단위이동점.x, 글자단위이동점.y);
         translate(자소단위이동점.x, 자소단위이동점.y);
+
         noStroke();
         fill(0);
         ellipse(this.시작점.x+2, this.시작점.y+2, 20, 20);
@@ -557,32 +542,10 @@ class 캐릭터하나 {
         pop();
         
     }
-    
-
-    가이드선() {
-        push();
-        stroke(234);
-        strokeWeight(.5);
-        line(100, 0, 100, 500);
-        line(200, 0, 200, 500);
-        line(300, 0, 300, 500);
-        line(400, 0, 400, 500);
-        line(500, 0, 500, 500);
-        line(600, 0, 600, 500);
-        
-        noStroke();
-        fill(0);
-        textSize(12);
-        text("100", 100, 30);
-        text("200", 200, 30);
-        text("300", 300, 30);
-        text("400", 400, 30);
-        text("500", 500, 30);
-        text("600", 600, 30);
-        pop();
-    }
 
 }
+
+
 
 class 캐릭터라인 {
     constructor(시작점, 글자이동점, 자소이동점, 자소타입) {
@@ -644,7 +607,7 @@ class 캐릭터라인 {
 
 }
 
-
+*/
 
 
 
@@ -717,15 +680,63 @@ function 자소모델설정(자소이름변수) {
 
 //개발함수 : 루프정지
 function keyPressed() {
-  var worktime = "" + year() + ". " + month() + ". " + day() + ". ";
+    var worktime = "" + year() + ". " + month() + ". " + day() + ". ";
+
+    switch (keyCode) {
+        case 67:
+            //C
+            changeLoop();
+            break;
+        case 68:
+            //D
+            changeSituation();
+            break;
+        case 83:
+            //S
+            changeTilt();
+            break;
+        default:
+            console.log("keyPressd. but nothing happend.")
+            break;
+    }
+    //Loop ON/OFF
+    function changeLoop() {
+        if (isLoop) {
+            console.log("noLoop()");
+            noLoop();
+            isLoop = false;
+        } else {
+            console.log("loop()");
+            loop();
+            isLoop = true;
+        }
+    }
+
+    function changeTilt() {
+        if (isTilt) {
+            isTilt = false;
+            console.log("ㅜnot tilt");
+        } else if (!isTilt) {
+            isTilt = true;
+            console.log("tilt");
+        }   
+    }
+
+    function changeSituation() {
+        console.log("changeSituation");
+    }
+    
+
+      
   //67 is c
   if (keyCode === 67) {
-    var loopState = isLoop;
-    if(loopState === true){ console.log("noLoop()"); noLoop(); isLoop = false;}
-    else { console.log("loop()");  loop(); isLoop = true; }
+    
     
   } else if (keyCode === 83) {
-    save(wokrname + " " + worktime);
+     
+    // save(wokrname + " " + worktime);
+  } else if (keyCode === 68) {
+      console.log("change situation!");
   }
 }
 

@@ -142,3 +142,44 @@ function 사잇점생성함수(start, end, len){
 
 
 
+
+
+//곁받침 체크 함수
+function 겹받침체크(arrayname) {
+    var lastest = arrayname[arrayname.length - 1];
+    var last = arrayname[arrayname.length - 2];
+    var t_lastest = Hangul.isConsonant(lastest);
+    var t_last = Hangul.isConsonant(last);
+    var result = false;
+    if (t_lastest === true && t_last === true) {
+        // console.log("곁밭침을 포함하는 문자 : " + arrayname);
+        result = true;
+    }
+    return result;
+}
+
+//곁받침을 홑낱자로 변환
+function 겹받침변환(arrayname) {
+
+    var lastest = arrayname.pop();
+    var last = arrayname.pop();
+    var newEl = Hangul.assemble([last, lastest]);
+    
+    if (newEl === 자소ㄱㅅ) { return 'ㄱㅅ'; }
+    else if (newEl === 자소ㄴㅈ) { return 'ㄴㅈ' }
+    else if (newEl === 자소ㄴㅎ) { return 'ㄴㅎ' }
+    else if (newEl === 자소ㄹㄱ) { return 'ㄹㄱ' }
+    else if (newEl === 자소ㄹㅁ) { return 'ㄹㅁ' }
+    else if (newEl === 자소ㄹㅂ) { return 'ㄹㅂ' }
+    else if (newEl === 자소ㄹㅅ) { return 'ㄹㅅ' }
+    else if (newEl === 자소ㄹㅌ) { return 'ㄹㅌ' }
+    else if (newEl === 자소ㄹㅍ) { return 'ㄹㅍ' }
+    else if (newEl === 자소ㄹㅎ) { return 'ㄹㅎ' }
+    else if (newEl === 자소ㅂㅅ) { return 'ㅂㅅ' }
+    else {
+        console.error("원하는 형태의 겹받침변환이 없습니다. from 겹받침변환()");
+        return 'ㄴㅈ';
+    }
+    
+}
+
