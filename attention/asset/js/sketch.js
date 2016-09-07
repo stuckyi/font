@@ -34,10 +34,10 @@ var 캐릭터라인배열 = []; // 캐릭터 표현 변수
 
 // 설정 : P5 DOM Element 
 var 요소위치 = {
-    캔버스위치: { x: 100, y: 100 },
+    캔버스위치: { x: 0, y: 100 },
     버튼위치: { x: 255, y: 55 },
     입력창위치: { x: 50, y: 55 },
-    마진 : { 왼쪽 : 10 }
+    마진 : { 왼쪽 : 2 }
 };
 
 var 스타일 = {
@@ -58,6 +58,7 @@ function setup() {
     background(스타일.배경색);
     frameRate(20);
     fill(0, 30);
+    
     
     /**
     * 사잇점 생성 및 글자데이터 초기화
@@ -85,15 +86,22 @@ function setup() {
 //    isLoop =false;
 }
 
+
+
+
+
 function draw() {
     background(스타일.배경색, 50);
     
-    
+    틸트값표시(베타, 감마);
+    changeTilt_MOBILE(감마); //디바이스의 감마값으로 액션 ON/OFF
+
     for (var value of 캐릭터배열) {
         value.업데이트(베타, 감마);
         value.그리기();
         value.움직임(); //몬스터객체사용시
     }
+    라이트표시();
     
     /*
     for (var value of 캐릭터라인배열) {
@@ -116,6 +124,26 @@ function redrawing() {
 
 
 
+function 틸트값표시(beta, gamma) {
+    push();
+    textSize(25);
+    fill(255);
+    text("베타 값 : " + beta, 500, 60);
+    text("감마 값 : " + gamma, 500, 100);
+    pop();
+}
+
+
+
+function 라이트표시() {
+    if (isTilt) {
+        push();
+        fill(255, 204, 0, 40);
+        rect(0, 0, width, height);
+        pop();
+        
+    }
+}
 
 function 모음변환(자소이름) {
 
@@ -693,7 +721,7 @@ function keyPressed() {
             break;
         case 83:
             //S
-            changeTilt();
+            changeTilt_PC();
             break;
         default:
             console.log("keyPressd. but nothing happend.")
@@ -712,7 +740,7 @@ function keyPressed() {
         }
     }
 
-    function changeTilt() {
+    function changeTilt_PC() {
         if (isTilt) {
             isTilt = false;
             console.log("ㅜnot tilt");
@@ -726,20 +754,24 @@ function keyPressed() {
         console.log("changeSituation");
     }
     
-
-      
-  //67 is c
-  if (keyCode === 67) {
-    
-    
-  } else if (keyCode === 83) {
-     
-    // save(wokrname + " " + worktime);
-  } else if (keyCode === 68) {
-      console.log("change situation!");
-  }
 }
 
+
+
+function changeTilt_MOBILE(gamma) {
+
+    var deviceAngle = abs(gamma);
+
+    
+    if (isTilt && (deviceAngle < 70) ){
+        isTilt = false;
+        console.log("ㅜnot tilt");
+    } else if (!isTilt && (deviceAngle > 70) ) {
+        isTilt = true;
+        console.log("tilt");
+    }   
+
+}
 
 
 // 스마트폰 가속도계 데이터 accelerometer Data

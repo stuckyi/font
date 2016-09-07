@@ -343,16 +343,13 @@ class 몬스터B {
     업데이트(b, g){
         this.g = g;
         this.b = b;
-        // 개선필요
-        this.닿자위치 = { x: this.글자이동점.x + this.g, y: this.글자이동점.y + m1 + this.b },
-        this.종적모음위치 = { x: this.글자이동점.x + m2 + this.g, y: this.글자이동점.y + this.b},
-        this.횡적모음위치 = { x: this.글자이동점.x + this.g, y: this.글자이동점.y + m3 + this.b},
-        this.받침위치 = { x: this.글자이동점.x + this.g, y: this.글자이동점.y + m4 + this.b};
+        // this.글자움직임(); //틸트정보로 글자까지움직일지 여부
+        
     }
 
     원점복귀() {    
-        this.movingBodyX += (this.시작점.x - this.movingBodyX) * 0.1;
-        this.movingBodyY += (this.시작점.y - this.movingBodyY) * 0.1;  
+            this.movingBodyX += (this.시작점.x - this.movingBodyX) * 0.1;
+            this.movingBodyY += (this.시작점.y - this.movingBodyY) * 0.1;
     }
     그리기(){
         
@@ -372,6 +369,14 @@ class 몬스터B {
         
         pop();
     }
+
+    글자위치움직임() {
+        // 개선필요
+        this.닿자위치 = { x: this.글자이동점.x + this.g, y: this.글자이동점.y + m1 + this.b },
+        this.종적모음위치 = { x: this.글자이동점.x + m2 + this.g, y: this.글자이동점.y + this.b},
+        this.횡적모음위치 = { x: this.글자이동점.x + this.g, y: this.글자이동점.y + m3 + this.b},
+        this.받침위치 = { x: this.글자이동점.x + this.g, y: this.글자이동점.y + m4 + this.b};
+    }
     
     //형태
     
@@ -387,9 +392,6 @@ class 몬스터B {
         
             //틸트했을때만, 다리가 보인다.
         if (isTilt) {
-            var 현재초 = second();
-            // myFunction();
-            // console.log(현재초);
 
             //머리
                 push();
@@ -417,6 +419,26 @@ class 몬스터B {
             }
         pop();
     }
+
+
+
+    움직임(){
+    this.movingBody();
+    this.headBanging();
+    this.legBanging();
+    this.leg1Swing1();
+    }
+    
+    
+    
+    movingBody(){
+       this.movingBodyX = this.movingBodyX + this.movingBodyDirection; //좌우움직임: 현재는 -1과 1사이의 랜덤값으로 되어있음
+        this.movingBodyY = this.movingBodyY + sin(radians(this.movingBodyAngle))*random(1,2);
+        this.movingBodyAngle = this.movingBodyAngle + random(10,40);
+    }
+    
+
+    
 
     body(){
         push();
@@ -452,21 +474,6 @@ class 몬스터B {
     }
     
     
-    
-    움직임(){
-    this.movingBody();
-    this.headBanging();
-    this.legBanging();
-    this.leg1Swing1();
-    }
-    
-    
-    
-    movingBody(){
-       this.movingBodyX = this.movingBodyX + this.movingBodyDirection; //좌우움직임: 현재는 -1과 1사이의 랜덤값으로 되어있음
-        this.movingBodyY = this.movingBodyY + sin(radians(this.movingBodyAngle))*random(1,2);
-        this.movingBodyAngle = this.movingBodyAngle + random(10,40);
-    }
     
     
     

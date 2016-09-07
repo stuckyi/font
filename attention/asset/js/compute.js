@@ -183,3 +183,39 @@ function 겹받침변환(arrayname) {
     
 }
 
+
+
+
+
+//P5로 DOM Element를 생성
+function makeDomElement(elName) {
+
+  switch (elName) {
+    case 'input':
+      makeInput();
+      break;
+    case 'button':
+      makeButton();
+      break;
+    default:
+      console.log("생성할 DOM Element 타입이 적절하지 않습니다.");
+      break;
+  }
+
+  function makeInput() {
+    //Input 설정    
+    input = createInput();                              //생성
+    input.addClass('form-control');                     //클래스 부여
+    input.size(200, 40);                                //크기
+    input.position(요소위치.입력창위치.x, 요소위치.입력창위치.y); //위치
+    //   input.hide();                  
+  }
+
+  function makeButton() {
+    //Button 설정 
+    button = createButton('글자생성');                   //생성
+    button.position(요소위치.버튼위치.x, 요소위치.버튼위치.y);  //위치
+    button.mousePressed(redrawing);                    //클릭시 이벤트함수 호출
+    button.addClass('btn btn-default');                //클래스 부여
+  }
+}
