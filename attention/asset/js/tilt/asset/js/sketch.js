@@ -1,109 +1,118 @@
-console.log("stuckyifont-0.1.js");
-console.log("ㅇㅇㅇ");
 
 
-
-var letterArray = ["자", "동", "생", "성", "해", "주", "세", "요"]; // 로딩 후 가장 처음에 보일 글자들
-var state = { currentX: 0, currentY: 0 };
-var textAreaX, textAreaY = 0; //글자 영역 결정 전역변수
-var rowX, rowY = 0;  //글자 위치 결정 전역변수
-var input, button, greeting, div;
+var 사용자입력문자 = ["자", "동", "생", "성", "해", "주", "세", "요"]; // 로딩 후 가장 처음에 보일 글자들
+var letterIndexByRow = 0; //현재 행(row)에서의 글자 인덱스
+var 글자위치 = { x: 0, y: 0 }; //글자 위치 결정 전역변수
+var input, button;
 
 //곁받침자소 변수선언 : code로 인식하지 못하기 때문 
 var 자소ㄱㅅ = Hangul.assemble(['ㄱ', 'ㅅ']), 자소ㄴㅈ = Hangul.assemble(['ㄴ', 'ㅈ']), 자소ㄴㅎ = Hangul.assemble(['ㄴ', 'ㅎ']), 자소ㄹㄱ = Hangul.assemble(['ㄹ', 'ㄱ']), 자소ㄹㅁ = Hangul.assemble(['ㄹ', 'ㅁ']), 자소ㄹㅂ = Hangul.assemble(['ㄹ', 'ㅂ']), 자소ㄹㅅ = Hangul.assemble(['ㄹ', 'ㅅ']), 자소ㄹㅌ = Hangul.assemble(['ㄹ', 'ㅌ']), 자소ㄹㅍ = Hangul.assemble(['ㄹ', 'ㅍ']), 자소ㄹㅎ = Hangul.assemble(['ㄹ', 'ㅎ']), 자소ㅂㅅ = Hangul.assemble(['ㅂ', 'ㅅ']), 자소우 = Hangul.disassemble('우')[1];
 
-//캔버스, Input, Button 요소의 위치 설정객체
-var elPos = {
-    canvasX: 0, canvasY: 140,
-    inputX: 50, inputY: 55,
-    btnX: 255, btnY: 55
-};
 
 var letterPos = { x: 60, y: 150 };
+var 요소위치 = {};
+var 스타일 = {};
+
+function 스타일지정() {
+    //P5 스타일
+    스타일.frameColor = (60,90,70);
+    스타일.frameStrokeWeight = 2;
+
+    스타일.선색상_기본 = 255;
+    스타일.선색상_외곽 = 0;
+    스타일.선굵기_기본 = 10;
+    스타일.선굵기_외곽 = 20;
 
 
+    //DOM Elment 위치
+    요소위치.캔버스위치 = { x: 0, y: 100 };
+    요소위치.버튼위치 = { x: 255, y: 55 };
+    요소위치.입력창위치 = { x: 50, y: 55 };
+    요소위치.마진 = { 왼쪽: 2 };
 
-function setup() {
-    
-    //캔버스 생성 및 변수에 할당
-    var mainCanvas = createCanvas(800, 1000);
-    mainCanvas.position(elPos.canvasX, elPos.canvasY); //캔버스 위치
-    
     //캔버스 기본 스타일 설정
     colorMode(HSL);
     strokeJoin(ROUND);
     fill(0);
-    // noLoop();
-
-    //Input 설정    
-    input = createInput(); //생성
-    input.addClass('form-control'); //클래스 부여
-    input.size(200, 40); //크기
-    input.position(elPos.inputX, elPos.inputY); //위치
-    //   input.hide();
+}
 
 
-    //Button 설정 
-    button = createButton('글자생성'); //생성
-    button.position(elPos.btnX, elPos.btnY); //위치
-    button.mousePressed(redrawing); //마우스 클릭시 이벤트함수 호출
-    button.addClass('btn btn-default'); //클래스 부여
+
+function setup() {
+    스타일지정();
+    //캔버스 생성 및 변수에 할당
+    var mainCanvas = createCanvas(800, 1000);
+    mainCanvas.position(요소위치.캔버스위치.x, 요소위치.캔버스위치.y); //캔버스 위치
 
 
+    //UI 생성
+    makeDomElement('input'); 
+    makeDomElement('button');
     
-
-    /*
-    greeting = createElement('h4', '');
-    greeting.position(220, 45);
-    */
-    
-    //초기화 완료후 캔버스는 감춘다.
-    // $('#defaultCanvas0').css('display', 'none');
-
 }
 
 function draw() {
     background(255);
-    //글자크기 변수
-    // letterWidth = letterWidth + 0.1 * beta;
-    // letterHeight = letterHeight + 0.1 * beta;
-
-    //글자 위치 변수
-    // letterPos.x += 0.05 * beta;
-    // letterPos.y += 0.05 * beta;
-
-    // textSize(25);
-    // text(letterPos.x, 100, 400);
-
-
-    //글자 위치 결정하는 for문    
-    for (var i = 0; i < letterArray.length; i++) {
-        textAreaX = i % 4;
-        rowX = textAreaX * (letterWidth + letterSpacing);
-        // rowX = textAreaX * (letterPos.x + letterSpacing);
+    
+    for (var i = 0; i < 사용자입력문자.length; i++) {
+        letterIndexByRow = i % 4;
+        글자위치.x = letterIndexByRow * (letterWidth + letterSpacing);
 
         //글자자소 생성 함수
-        틸트폰트생성(letterArray[i], rowX, rowY, gamma);
+        틸트폰트생성(사용자입력문자[i], 글자위치.x, 글자위치.y, gamma);
         
         //글자수에 따라 줄 변경 : 현재 3글자에 변경
-        if (textAreaX === 3) {
-            rowY += (letterHeight + lineHeight);
-            // rowY += (letterPos.y + lineHeight);
+        if (letterIndexByRow === 3) {
+            글자위치.y += (letterHeight + lineHeight);
         }
     }
     //위치값 초기화
-    rowX = 0;
-    rowY = 0;
-} //end draw
+    글자위치.x = 0;
+    글자위치.y = 0;
+} 
+
+
+
+
+
+//P5로 DOM Element를 생성
+function makeDomElement(elName) {
+
+  switch (elName) {
+    case 'input':
+      makeInput();
+      break;
+    case 'button':
+      makeButton();
+      break;
+    default:
+      console.log("생성할 DOM Element 타입이 적절하지 않습니다.");
+      break;
+  }
+
+  function makeInput() {
+    //Input 설정    
+    input = createInput();                              //생성
+    input.addClass('form-control');                     //클래스 부여
+    input.size(200, 40);                                //크기
+    input.position(요소위치.입력창위치.x, 요소위치.입력창위치.y); //위치
+    //   input.hide();                  
+  }
+
+  function makeButton() {
+    //Button 설정 
+    button = createButton('글자생성');                   //생성
+    button.position(요소위치.버튼위치.x, 요소위치.버튼위치.y);  //위치
+    button.mousePressed(redrawing);                    //클릭시 이벤트함수 호출
+    button.addClass('btn btn-default');                //클래스 부여
+  }
+}
 
 
 
 //글자자소 생성 함수 --------------------------------------
 function 틸트폰트생성(letter, tx, ty, g) {
 
-    
-    // console.log(letter);
-    // console.log(letterSplit);
     //각 자소타입별 위치
     var 닿자위치 = {
             x: tx + g,
@@ -130,6 +139,7 @@ function 틸트폰트생성(letter, tx, ty, g) {
             var pushEl = 겹받침변환(disassemble);
             disassemble.push(pushEl);
         }
+        
         //자소분리(disassemble)된 단위로 font함수 호출
         for (var j = 0; j < disassemble.length; j++) {
             var jaso = disassemble[j];
@@ -307,6 +317,7 @@ function 틸트폰트생성(letter, tx, ty, g) {
                 break;
             case 'ㅡ':
                 으(횡적모음위치.x, 횡적모음위치.y, g);
+                break;
             case 'ㅣ':
                 이1(종적모음위치.x, 종적모음위치.y, g);
                 break;
@@ -342,7 +353,7 @@ function 틸트폰트생성(letter, tx, ty, g) {
 } //makeJaso end
 
 //곁받침 체크 함수
-function 겹받침체크(arrayname) {
+function 겹받침체크(배열이름) {
     var lastest = arrayname[arrayname.length - 1];
     var last = arrayname[arrayname.length - 2];
     var t_lastest = Hangul.isConsonant(lastest);
@@ -391,8 +402,13 @@ function 겹받침변환(arrayname) {
 //버튼 클릭 이벤트 : 클릭할때마다 현재 Input값을 바탕으로 다시 loop를 실행시킨다.
 function redrawing() {
     var inputall = input.value();
-    var inputSplit = inputall.split('');
-    letterArray = inputSplit;
+    사용자입력문자 = inputall.split('');
     background(255); //다시 그릴때 이전의 글자를 지움(덮어쓰기)
     loop();
+}
+
+
+
+function 이미지저장() {
+    save(사용자입력문자 + "");
 }

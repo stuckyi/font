@@ -46,8 +46,12 @@ var mh0 = letterHeight / 50; // 단위 여백 - 세로 : 10
 var frameColor = (60,90,70); //이상하다......
 var frameStrokeWeight = 2;
 
-var fontColor = 0;
+var fontColor = 255;
+var fontColor_OUTER = 0;
 var fontStrokeWeight = 10;
+var fontStrokeWeight_OUTER = 10;
+
+
 
 
 

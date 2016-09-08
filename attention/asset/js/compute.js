@@ -498,6 +498,52 @@ function 자소타입얻기(자소이름, 자소인덱스, 글자이동점객체
     
 }
 
+/*
+//감마값이 +이면, 틸트각도범윕보다 커야하고, -이면 틸트각도범위보다 작아야해.
+function 틸트상태업데이트(gamma) {
+
+    var deviceAngle = abs(gamma);
+    
+    if (isTilt && (deviceAngle < 틸트각도범위) ){
+        isTilt = false;
+        console.log("틸트해제");
+    } else if (!isTilt && (deviceAngle > 틸트각도범위) ) {
+        isTilt = true;
+        console.log("틸트동작");
+    }   
+}
+*/
+
+
+
+
+//감마값이 +이면, 틸트각도범윕보다 커야하고, -이면 틸트각도범위보다 작아야해.
+function 틸트상태업데이트(gamma) {
+
+    if (isTilt) {
+        var states = 틸트범위여부(gamma);
+        if (states === false) { isTilt = false; console.log("not tilt"); }
+    } else if (!isTilt) {
+        var states = 틸트범위여부(gamma);
+        if (states === true) { isTilt = true; console.log("tilt"); }
+    }
+
+    
+}
+
+
+
+function 틸트범위여부(gamma) {
+
+    if (-(틸트각도범위) < gamma && gamma < 틸트각도범위) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
 
 
 function 틸트값표시(beta, gamma) {

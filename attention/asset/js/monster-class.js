@@ -326,12 +326,12 @@ class 몬스터B {
         
 
         var 랜덤칼라인덱스 = Math.round(random(0, 6));
-        var 랜덤칼라리스트 = ['hsl(149, 100%, 39%)', 'hsl(46, 100%, 54%)', 'hsl(13, 100%, 84%)', 'hsl(278, 19%, 74%)', 'hsl(51, 62%, 85%)', 'hsl(67, 63%, 49%)', 'hsl(161, 49%, 58%)'];
+        
         
          
 
-        this.bodyColor_tilt = color(랜덤칼라리스트[랜덤칼라인덱스]); //틸트 몸색
-        this.bodyColor = color('hsl(200,30%,60%)'); //기본몸색
+        this.bodyColor_tilt = color(스타일.몬스터색상_랜덤[랜덤칼라인덱스]); //틸트 몸색
+        this.bodyColor = 스타일.몬스터색상_기본; //기본몸색
 
         this.headColor = color('hsl(200,30%,60%)'); //몸색
         this.faceColor = color('hsl(0,0%,100%)'); //얼굴색

@@ -4,10 +4,6 @@ var 알파 = 0, 베타 = 0, 감마 = 0;
 var 자소이름리스트;
 var 글자데이터;
 
-
-
-
-
 /* 곁받침 자소 선언 : code로 인식하지 못하는 문제 해결방안 *** */ 
 var 자소ㄱㅅ = Hangul.assemble(['ㄱ', 'ㅅ']), 자소ㄴㅈ = Hangul.assemble(['ㄴ', 'ㅈ']), 자소ㄴㅎ = Hangul.assemble(['ㄴ', 'ㅎ']), 자소ㄹㄱ = Hangul.assemble(['ㄹ', 'ㄱ']), 자소ㄹㅁ = Hangul.assemble(['ㄹ', 'ㅁ']), 자소ㄹㅂ = Hangul.assemble(['ㄹ', 'ㅂ']), 자소ㄹㅅ = Hangul.assemble(['ㄹ', 'ㅅ']), 자소ㄹㅌ = Hangul.assemble(['ㄹ', 'ㅌ']), 자소ㄹㅍ = Hangul.assemble(['ㄹ', 'ㅍ']), 자소ㄹㅎ = Hangul.assemble(['ㄹ', 'ㅎ']), 자소ㅂㅅ = Hangul.assemble(['ㅂ', 'ㅅ']), 자소우 = Hangul.disassemble('우')[1];
 
@@ -16,16 +12,14 @@ var 자소ㄱㅅ = Hangul.assemble(['ㄱ', 'ㅅ']), 자소ㄴㅈ = Hangul.assemb
 // 글자처리 변수
 const MAX_TYPE = 2; // 최대 입력 가능 문자
 const 사잇점개수 = 14; // 자소별기준점 사이에 추가할 사잇점의 수
-var 사용자입력문자 = '꼬또'; // 사용자입력 기본값
+var 사용자입력문자 = '젭라'; // 사용자입력 기본값
 
 
 //State Info
 var isLoop = true;
 var isTilt = false;
+var 틸트각도범위 = 70; //틸트액션을 on/off할 디바이스의 감마 값 기준값   
 
-
-//Style
-// var 자간 = 180, 행간 = 100;
 
 // 데이터모델
 var 글자데이터모델 = [];  // 글자데이터모델 
@@ -37,15 +31,8 @@ var 캐릭터라인배열 = []; // 캐릭터 표현 변수
 
 
 // 설정 : P5 DOM Element 
-var 요소위치 = {
-   
-};
-
+var 요소위치 = {};
 var 스타일 = {};
-
-
-
-
 
 
 function setup() {
@@ -93,12 +80,16 @@ function draw() {
     background(배경색, 50);
 
     틸트상태업데이트(감마); //디바이스의 감마값으로 틸트액션 ON/OFF
+    틸트값표시(베타, 감마);
+    text("" + 틸트범위여부(감마), 300, 300);
 
     for (var value of 캐릭터배열) {
         value.업데이트(베타, 감마);
         value.그리기();
         value.움직임();
     }
+
+    
 }
 
 
@@ -179,7 +170,7 @@ function 스타일적용() {
     스타일.행간 = 100;
     스타일.배경색 = 0;
     스타일.배경색_틸트 = color('hsl(2, 100%, 78%)');
-    스타일.몬스터색상_기본 = color('hsl(200,30%,60%)'); //기본몸색
+    스타일.몬스터색상_기본 = color('hsl(0,0%,100%)'); //기본몸색
     스타일.몬스터색상_랜덤 = [
         color('hsl(149, 100%, 39%)'),
         color('hsl(46, 100%, 54%)'),
@@ -254,73 +245,6 @@ class 자소하나{
 }
 
 
-
-
-//개발함수 : 루프정지
-function keyPressed() {
-    var worktime = "" + year() + ". " + month() + ". " + day() + ". ";
-
-    switch (keyCode) {
-        case 67:
-            //C
-            changeLoop();
-            break;
-        case 68:
-            //D
-            changeSituation();
-            break;
-        case 83:
-            //S
-            changeTilt_PC();
-            break;
-        default:
-            console.log("keyPressd. but nothing happend.")
-            break;
-    }
-    //Loop ON/OFF
-    function changeLoop() {
-        if (isLoop) {
-            console.log("noLoop()");
-            noLoop();
-            isLoop = false;
-        } else {
-            console.log("loop()");
-            loop();
-            isLoop = true;
-        }
-    }
-
-    function changeTilt_PC() {
-        if (isTilt) {
-            isTilt = false;
-            console.log("ㅜnot tilt");
-        } else if (!isTilt) {
-            isTilt = true;
-            console.log("tilt");
-        }   
-    }
-
-    function changeSituation() {
-        console.log("changeSituation");
-    }
-    
-}
-
-
-
-function 틸트상태업데이트(gamma) {
-
-    var deviceAngle = abs(gamma);
-
-    
-    if (isTilt && (deviceAngle < 70) ){
-        isTilt = false;
-        console.log("틸트해제");
-    } else if (!isTilt && (deviceAngle > 70) ) {
-        isTilt = true;
-        console.log("틸트동작");
-    }   
-}
 
 
 // 스마트폰 가속도계 데이터 accelerometer Data
