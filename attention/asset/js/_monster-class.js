@@ -324,15 +324,7 @@ class 몬스터B {
         this.swingLeg1Angle = 0; //허벅지 흔들리는 각도
         this.swingLegAdd = -1; //허벅지 각도에 더해주는 수
         
-
-        var 랜덤칼라인덱스 = Math.round(random(0, 6));
-        var 랜덤칼라리스트 = ['hsl(149, 100%, 39%)', 'hsl(46, 100%, 54%)', 'hsl(13, 100%, 84%)', 'hsl(278, 19%, 74%)', 'hsl(51, 62%, 85%)', 'hsl(67, 63%, 49%)', 'hsl(161, 49%, 58%)'];
-        
-         
-
-        this.bodyColor_tilt = color(랜덤칼라리스트[랜덤칼라인덱스]); //틸트 몸색
-        this.bodyColor = color('hsl(200,30%,60%)'); //기본몸색
-
+        this.bodyColor = color('hsl(200,30%,60%)'); //몸색
         this.headColor = color('hsl(200,30%,60%)'); //몸색
         this.faceColor = color('hsl(0,0%,100%)'); //얼굴색
         this.eyeColor = color('hsl(0,0%,20%)'); //눈색
@@ -389,7 +381,7 @@ class 몬스터B {
         this.body();    
             
         
-        //틸트했을때만, 다리가 보인다.
+            //틸트했을때만, 다리가 보인다.
         if (isTilt) {
 
             //머리
@@ -441,15 +433,7 @@ class 몬스터B {
 
     body(){
         push();
-        //Tilt State에 따라 몬스터 몸색상 변화
-        if (isTilt) {
-            fill(this.bodyColor_tilt);    
-        } else {
-            fill(this.bodyColor);
-        }
-
-        
-
+        fill(this.bodyColor);
         noStroke();
         rectMode(CENTER);
         rect(0,0,this.bodyWidth,this.bodyHeight,this.bodyWidth / 3);
@@ -536,3 +520,7 @@ class 몬스터B {
 }
 
 
+            function myFunction() {
+                setTimeout(function(){ alert("Hello"); }, 3000);
+            }
+                
