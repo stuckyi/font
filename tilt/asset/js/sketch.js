@@ -1,8 +1,8 @@
 
 var 알파, 베타, 감마 = 0;
 var 메인캔버스, 입력창, 입력버튼;
-var 사용자입력문자 = "처음보일문자".split(''); //사용자입력문자 변수 선언 및 초기값 설정
-var 한줄당최대글자수 = 3;
+var 사용자입력문자 = "음음음음임임임임".split(''); //사용자입력문자 변수 선언 및 초기값 설정
+var 한줄당최대글자수 = 3; 
 
 var 요소위치 = {};
 var 스타일 = {};
@@ -34,7 +34,6 @@ function draw() {
         if (반복범위 === 한줄당최대글자수) { 글자위치.y += (글자높이 + 행간); } // 글자위치 업데이트 (Y축)
     }
 } 
-
 
 //스타일요소 지정
 function 스타일지정() {
@@ -98,12 +97,6 @@ function makeDomElement(요소이름) {
 //글자 생성 함수
 function 틸트폰트생성(letter, tx, ty, g) {
 
-    //자소타입별 위치
-    var 닿자위치 = { x: tx + g, y: ty + m1 },
-        종적모음위치 = { x: tx + m2, y: ty },
-        횡적모음위치 = { x: tx, y: ty + m3 },
-        받침위치 = { x: tx + g, y: ty + m4 };
-
     var 자소분리배열 = Hangul.disassemble(letter);
 
     //겹받침 체크후 자소배열을 곁받침형태로 변환
@@ -112,9 +105,19 @@ function 틸트폰트생성(letter, tx, ty, g) {
         var pushEl = 겹받침변환(자소분리배열);
         자소분리배열.push(pushEl);
     }
+
+    //종적모음체크 한다면 여기에 
+    var 종적모음여부 = 종적모음체크(자소분리배열);
+    if (!종적모음여부) { tx = tx + m5; } 
     
+
+    //자소타입별 위치
+    var 닿자위치 = { x: tx + g, y: ty + m1 },
+        종적모음위치 = { x: tx + m2, y: ty },
+        횡적모음위치 = { x: tx, y: ty + m3 },
+        받침위치 = { x: tx + g, y: ty + m4 };
+
     //자소분리(disassemble)된 단위로 폰트 생성
-    var 자소인덱스 = 0;
     for (var j = 0; j < 자소분리배열.length; j++){
         var 자소 = 자소분리배열[j];
         if (자소 === 자소우) { 자소 = '우'; } //VisualStudio Code에서 모음 '우'가 표시되지않아 변경

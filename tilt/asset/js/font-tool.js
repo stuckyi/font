@@ -34,3 +34,29 @@ function 겹받침변환(배열이름) {
         return 'ㄴㅈ';
     }
 }
+
+//배열에 종적모음이있는지 체크한후 boolean을 리턴한다.
+function 종적모음체크(배열이름) {
+    for (var value of 배열이름) {
+        //주어진문자가 모음인경우
+        if (Hangul.isVowel(value)) {
+            
+            switch (value) {
+                case 'ㅏ': return true;
+                case 'ㅑ': return true;
+                case 'ㅓ': return true;
+                case 'ㅕ': return true;
+                case 'ㅣ': return true;
+                case 'ㅐ': return true;
+                case 'ㅒ': return true;
+                case 'ㅔ': return true;
+                case 'ㅖ': return true;
+                default:
+                    return false;
+                    
+            }
+        }
+    }
+}
+    
+    

@@ -739,9 +739,13 @@ function 이A(tx, ty, g) {
     
     선스타일지정('in');
     //중간세로선
-    line(dp1x,dp1y,dp8x+g,dp8y);
-    line(dp8x+g,dp8y,dp12x+g,dp12y);
-    line(dp12x+g,dp12y,dp2x,dp2y);
+    line(dp1x,dp1y,dp10x+g,dp10y);
+    line(dp10x+g,dp10y,dp12x+g,dp12y);
+    line(dp12x + g, dp12y, dp2x, dp2y);
+    
+    // line(dp1x,dp1y,dp8x+g,dp8y);
+    // line(dp8x+g,dp8y,dp12x+g,dp12y);
+    // line(dp12x+g,dp12y,dp2x,dp2y);
     
     pop();
 }
