@@ -301,6 +301,8 @@ function 얇은ㄴ(tx,ty){
     noFill();
     선스타일지정('out');
     translate(tx, ty);
+    line(bp1x,bp1y,bp13x,bp13y);
+    line(bp13x,bp13y,bp17x,bp17y);
     선스타일지정('in');
     line(bp1x,bp1y,bp13x,bp13y);
     line(bp13x,bp13y,bp17x,bp17y);
