@@ -23,7 +23,7 @@ function setup() {
 
 function draw() {
     background(스타일.배경색);
-    var 글자위치 = { x: 0, y: 0 };                                     // 글자위치 초기화
+    var 글자위치 = { x: 0, y: 10 };                                     // 글자위치 초기화
 
     for (var i = 0; i < 사용자입력문자.length; i++) {
         var 반복범위 = i % (한줄당최대글자수+1);                           // 나머지연산자
