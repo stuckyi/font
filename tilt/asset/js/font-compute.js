@@ -550,7 +550,7 @@ function 으(tx, ty, g) {
     * 개수 : 9종류 X2 = 18 개
  */
 
-function 아A(tx,ty,g){
+function 아A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -570,7 +570,7 @@ function 아A(tx,ty,g){
     line(dp6x + g, dp6y, dp5x + g, dp5y);
     pop();
 }
-function 아B(tx,ty,g){
+function 아B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -592,7 +592,7 @@ function 아B(tx,ty,g){
     line(dp6x + g, dp6y, dp5x + g, dp5y);
     pop();
 }
-function 야A(tx,ty,g){
+function 야A(tx,ty,g,b){
     push();
     noFill();
 
@@ -618,7 +618,7 @@ function 야A(tx,ty,g){
     line(dp17x+g,dp17y,dp18x+g,dp18y);
     pop();
 }
-function 야b(tx,ty,g){
+function 야b(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -643,7 +643,7 @@ function 야b(tx,ty,g){
     line(dp17x + g, dp17y, dp18x + g, dp18y);
     pop();
 }
-function 어A(tx,ty,g){
+function 어A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -664,7 +664,7 @@ function 어A(tx,ty,g){
     line(dp7x + g, dp7y, dp5x + g, dp5y);
     pop();
 }
-function 어B(tx,ty,g){
+function 어B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -684,7 +684,7 @@ function 어B(tx,ty,g){
     line(dp7x + g, dp7y, dp5x + g, dp5y);
     pop();
 }
-function 여A(tx,ty,g){
+function 여A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -706,7 +706,7 @@ function 여A(tx,ty,g){
     line(dp17x + g, dp17y, dp19x + g, dp19y);
     pop();
 }
-function 여B(tx,ty,g){
+function 여B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -729,7 +729,7 @@ function 여B(tx,ty,g){
     line(dp17x + g, dp17y, dp19x + g, dp19y);
     pop();
 }
-function 이A(tx, ty, g) {
+function 이A(tx, ty, g,b) {
     push();
     noFill();
     선스타일지정('out');
@@ -751,7 +751,7 @@ function 이A(tx, ty, g) {
     
     pop();
 }
-function 이B(tx,ty,g){
+function 이B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -771,7 +771,7 @@ function 이B(tx,ty,g){
     
     pop();
 }
-function 애A(tx,ty,g){
+function 애A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -804,7 +804,7 @@ function 애A(tx,ty,g){
 
     pop();
 }
-function 애B(tx,ty,g){
+function 애B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -835,7 +835,7 @@ function 애B(tx,ty,g){
 
     pop();
 }
-function 얘A(tx,ty,g){
+function 얘A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -868,7 +868,7 @@ function 얘A(tx,ty,g){
 
     pop();
 }
-function 얘B(tx,ty,g){
+function 얘B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -903,7 +903,7 @@ function 얘B(tx,ty,g){
 
     pop();
 }
-function 에A(tx,ty,g){
+function 에A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -936,7 +936,7 @@ function 에A(tx,ty,g){
     
     pop();
 }
-function 에B(tx,ty,g){
+function 에B(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -967,7 +967,7 @@ function 에B(tx,ty,g){
     line(dp13x + g, dp13y, dp4x, dp4y);
     pop();
 }
-function 예A(tx,ty,g){
+function 예A(tx,ty,g,b){
     push();
     noFill();
     선스타일지정('out');
@@ -997,7 +997,7 @@ function 예A(tx,ty,g){
     line(dp13x+g,dp13y,dp4x,dp4y);
     pop();
 }
-function 예B(tx,ty,g){
+function 예B(tx,ty,g,b){
     push();
     noFill();
 	    선스타일지정('out');
@@ -1107,6 +1107,6 @@ function 공백(tx, ty) {
     noFill();
     noStroke();
     translate(tx,ty);
-    ellipse(p7x, p7y, circleWidth, circleHeight);
+    ellipse(p7x, p7y, 1, 1);
     pop();
 } 

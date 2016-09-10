@@ -6,7 +6,7 @@ var 한줄당최대글자수 = 3;
 
 var 요소위치 = {};
 var 스타일 = {};
-
+var 공백정보 = { 이전: false, 현재: false };
 
 function setup() {
     //스타일 초기화
@@ -29,7 +29,7 @@ function draw() {
         var 반복범위 = i % (한줄당최대글자수+1);                           // 나머지연산자
         글자위치.x = 반복범위 * (글자너비 + 자간);                          // 글자위치 업데이트 (X축)         
         
-        틸트폰트생성(사용자입력문자[i], 글자위치.x, 글자위치.y, 감마);           // 글자생성함수호출
+        틸트폰트생성(사용자입력문자[i], 글자위치.x, 글자위치.y, 감마, 베타);           // 글자생성함수호출
 
         if (반복범위 === 한줄당최대글자수) { 글자위치.y += (글자높이 + 행간); } // 글자위치 업데이트 (Y축)
     }
@@ -43,8 +43,8 @@ function 스타일지정() {
     //글자꼴
     스타일.선색상_기본 = 255;
     스타일.선색상_외곽 = 0;
-    스타일.선굵기_기본 = 10;
-    스타일.선굵기_외곽 = 20;
+    스타일.선굵기_기본 = 8;
+    스타일.선굵기_외곽 = 14;
 
 
     //P5 스타일
@@ -95,7 +95,7 @@ function makeDomElement(요소이름) {
 }
 
 //글자 생성 함수
-function 틸트폰트생성(letter, tx, ty, g) {
+function 틸트폰트생성(letter, tx, ty, g, b) {
 
     var 자소분리배열 = Hangul.disassemble(letter);
 
@@ -108,14 +108,15 @@ function 틸트폰트생성(letter, tx, ty, g) {
 
     //종적모음체크 한다면 여기에 
     var 종적모음여부 = 종적모음체크(자소분리배열);
-    if (!종적모음여부) { tx = tx + m5; } 
+    if (!종적모음여부) { tx = tx + m5; }
+    
     
 
     //자소타입별 위치
-    var 닿자위치 = { x: tx + g, y: ty + m1 },
-        종적모음위치 = { x: tx + m2, y: ty },
-        횡적모음위치 = { x: tx, y: ty + m3 },
-        받침위치 = { x: tx + g, y: ty + m4 };
+    var 닿자위치 = { x: tx + 1.4*g, y: ty + m1 + 0.3*b},
+        종적모음위치 = { x: tx + m2+ 0.2*g, y: ty + 0.3*b},
+        횡적모음위치 = { x: tx+ 0.2*g, y: ty + m3 + 0.4*b},
+        받침위치 = { x: tx + 0.7*g, y: ty + m4 + 0.5*b};
 
     //자소분리(disassemble)된 단위로 폰트 생성
     for (var j = 0; j < 자소분리배열.length; j++){
@@ -155,20 +156,20 @@ function 틸트폰트생성(letter, tx, ty, g) {
             case 'ㅆ': (j === 0) ? ㅆ(닿자위치.x, 닿자위치.y) : ㅆ(받침위치.x, 받침위치.y); break;
             case 'ㅉ': (j === 0) ? ㅉ(닿자위치.x, 닿자위치.y) : ㅉ(받침위치.x, 받침위치.y); break;   
                 
-            case 'ㅏ': 아A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅑ': 야A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅓ': 어A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅕ': 여A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅗ': 오(횡적모음위치.x, 횡적모음위치.y, g); break;
-            case 'ㅛ': 요(횡적모음위치.x, 횡적모음위치.y, g); break;
-            case '우': 우(횡적모음위치.x, 횡적모음위치.y, g); break;
-            case 'ㅠ': 유(횡적모음위치.x, 횡적모음위치.y, g); break;
-            case 'ㅡ': 으(횡적모음위치.x, 횡적모음위치.y, g); break;
-            case 'ㅣ': 이A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅐ': 애A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅒ': 얘A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅔ': 에A(종적모음위치.x, 종적모음위치.y, g); break;
-            case 'ㅖ': 예A(종적모음위치.x, 종적모음위치.y, g); break;
+            case 'ㅏ': 아A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅑ': 야A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅓ': 어A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅕ': 여A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅗ': 오(횡적모음위치.x, 횡적모음위치.y, g, b); break;
+            case 'ㅛ': 요(횡적모음위치.x, 횡적모음위치.y, g, b); break;
+            case '우': 우(횡적모음위치.x, 횡적모음위치.y, g, b); break;
+            case 'ㅠ': 유(횡적모음위치.x, 횡적모음위치.y, g, b); break;
+            case 'ㅡ': 으(횡적모음위치.x, 횡적모음위치.y, g, b); break;
+            case 'ㅣ': 이A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅐ': 애A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅒ': 얘A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅔ': 에A(종적모음위치.x, 종적모음위치.y, g, b); break;
+            case 'ㅖ': 예A(종적모음위치.x, 종적모음위치.y, g, b); break;
                 
             case ' ': 공백(받침위치.x, 받침위치.y); break;
         default:
@@ -189,8 +190,8 @@ function redrawing() {
 // 스마트폰 가속도계 데이터 accelerometer Data
 window.addEventListener('deviceorientation', function(e) 
 {
-//   알파 = e.alpha;
-//   베타 = e.beta;
+  알파 = e.alpha;
+  베타 = e.beta;
   감마 = e.gamma;
 });
 
